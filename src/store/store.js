@@ -42,7 +42,6 @@ export default new Vuex.Store({
     [actionTypes.LOGIN_WITH_GOOGLE] ({commit}) {
       Auth.loginWithGoogle()
         .then((login) => {
-          console.log(login);
           return commit({
             type: actionTypes.LOGIN_SUCCESSFUL,
             user: {

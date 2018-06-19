@@ -9,30 +9,22 @@
             </md-app-toolbar>
 
             <md-app-drawer :md-active.sync="menuVisible">
-                <md-toolbar class="md-transparent" md-elevation="0">
-                    Navigation
-                </md-toolbar>
-
                 <md-list>
                     <md-list-item to="/" v-on:click="menuVisible = false">
                         <md-icon>home</md-icon>
-                        <span>Home</span>
-                    </md-list-item>
-                    <md-list-item to="/about" v-on:click="menuVisible = false">
-                        <md-icon>info</md-icon>
-                        <span>About</span>
+                        <span class="nav-label">Home</span>
                     </md-list-item>
                     <md-list-item v-if="isUserLoggedIn" to="/admin" v-on:click="menuVisible = false">
                         <md-icon>settings</md-icon>
-                        <span>Admin</span>
+                        <span class="nav-label">Admin</span>
                     </md-list-item>
                     <md-list-item v-if="!isUserLoggedIn" v-on:click="login">
                         <md-icon>person</md-icon>
-                        <span>Login</span>
+                        <span class="nav-label">Login</span>
                     </md-list-item>
                     <md-list-item v-if="isUserLoggedIn" v-on:click="logout">
                         <md-icon>person_outline</md-icon>
-                        <span>Logout</span>
+                        <span class="nav-label">Logout</span>
                     </md-list-item>
                 </md-list>
             </md-app-drawer>
@@ -86,7 +78,7 @@ export default {
         width: 25vw;
     }
 
-    .md-list-item span {
+    .md-list-item .nav-label {
         text-align: left;
         width: 100%;
     }

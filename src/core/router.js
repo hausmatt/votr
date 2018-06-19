@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../views/HomePage.vue';
+import VotingPage from '../views/VotingPage';
 import AdminPage from '../views/admin/AdminPage';
 import Auth from '../service/auth';
 
@@ -12,6 +13,11 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/voting',
+      name: 'Voting',
+      component: VotingPage
     },
     {
       path: '/admin',

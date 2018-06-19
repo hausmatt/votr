@@ -55,7 +55,7 @@ import {validationMixin} from 'vuelidate';
 import {minLength, required} from 'vuelidate/lib/validators';
 
 export default {
-  name: 'FormValidation',
+  name: 'VotingItemCreatorForm',
   mixins: [validationMixin],
   data: () => ({
     form: {

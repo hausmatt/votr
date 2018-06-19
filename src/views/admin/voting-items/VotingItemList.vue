@@ -8,19 +8,19 @@
                 <md-table-head>Type</md-table-head>
             </md-table-row>
 
-            <ItemListEntry v-for="entry in entries" :key="entry.id" v-bind:entry="entry"
+            <VotingItemListEntry v-for="entry in entries" :key="entry.id" v-bind:entry="entry"
                            v-on:remove-entry="removeEntry"/>
         </md-table>
     </div>
 </template>
 
 <script>
-import ItemListEntry from './ItemListEntry.vue';
+import VotingItemListEntry from './VotingItemListEntry.vue';
 
 export default {
-  name: 'ItemList',
+  name: 'VotingItemList',
   components: {
-    ItemListEntry,
+      VotingItemListEntry,
   },
   props: {
     entries: Array

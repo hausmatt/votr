@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import ItemList from './ItemList';
+import VotingItemList from './voting-items/VotingItemList';
 
 export default {
   name: 'AdminPage',
   components: {
-    ItemList
+      VotingItemList
   },
   data: function () {
     return {

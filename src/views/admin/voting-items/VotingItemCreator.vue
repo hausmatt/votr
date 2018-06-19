@@ -4,7 +4,7 @@
         <md-dialog :md-active.sync=showDialog>
             <md-dialog-title>New Entry</md-dialog-title>
             <md-dialog-content>
-                <ItemCreatorForm/>
+                <VotingItemCreatorForm/>
             </md-dialog-content>
 
         </md-dialog>
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import ItemCreatorForm from './ItemCreatorForm';
+import VotingItemCreatorForm from './VotingItemCreatorForm';
 
 export default {
-  name: 'ItemCreator',
+  name: 'VotingItemCreator',
   components: {
-    ItemCreatorForm
+      VotingItemCreatorForm
   },
   data: function () {
     return {

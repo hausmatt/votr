@@ -7,23 +7,23 @@
                 </md-button>
             </div>
             <div class="md-layout-item md-size-20">
-                <ItemCreator/>
+                <VotingItemCreator/>
             </div>
         </div>
-        <ItemList v-bind:entries="entries"/>
+        <VotingItemList v-bind:entries="entries"/>
     </div>
 
 </template>
 
 <script>
-    import ItemList from './ItemList';
-    import ItemCreator from './ItemCreator';
+    import VotingItemList from './VotingItemList';
+    import VotingItemCreator from './VotingItemCreator';
 
     export default {
         name: 'VotingItems',
         components: {
-            ItemList,
-            ItemCreator
+            VotingItemList,
+            VotingItemCreator
         },
         props: {},
         data: function () {

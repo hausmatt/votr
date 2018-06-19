@@ -1,29 +1,71 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app" class="page-container">
+        <md-app>
+            <md-app-toolbar class="md-primary">
+                <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <span class="md-title">{{ this.$router.currentRoute.name }}</span>
+            </md-app-toolbar>
+
+            <md-app-drawer :md-active.sync="menuVisible">
+                <md-toolbar class="md-transparent" md-elevation="0">
+                    Navigation
+                </md-toolbar>
+
+                <md-list>
+                    <md-list-item to="/" v-on:click="menuVisible = false">
+                        <md-icon>home</md-icon>
+                        <span>Home</span>
+                    </md-list-item>
+                    <md-list-item to="/about" v-on:click="menuVisible = false">
+                        <md-icon>info</md-icon>
+                        <span>About</span>
+                    </md-list-item>
+                    <md-list-item to="/admin" v-on:click="menuVisible = false">
+                        <md-icon>settings</md-icon>
+                        <span>Admin</span>
+                    </md-list-item>
+                </md-list>
+            </md-app-drawer>
+
+            <md-app-content>
+                <router-view/>
+            </md-app-content>
+        </md-app>
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+  name: 'App',
+  data: () => ({
+    menuVisible: false
+  })
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+</script>
+
+<style lang="scss" scoped>
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+
     }
-  }
-}
+
+    .md-app {
+        border: 1px solid rgba(#000, .12);
+        min-height: 100vh;
+    }
+
+    .md-drawer {
+        width: 25vw;
+    }
+
+    .md-list-item span {
+        text-align: left;
+        width: 100%;
+    }
 </style>

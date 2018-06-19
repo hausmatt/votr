@@ -14,15 +14,7 @@
                         <md-icon>home</md-icon>
                         <span class="nav-label">Home</span>
                     </md-list-item>
-<<<<<<< 12c846f30fa39d1b416952963352193ba3c7c7a0
                     <md-list-item v-if="isUserLoggedIn" to="/admin/votings" v-on:click="menuVisible = false">
-=======
-                    <md-list-item to="/voting" v-on:click="menuVisible = false">
-                        <md-icon>dashboard</md-icon>
-                        <span class="nav-label">Voting</span>
-                    </md-list-item>
-                    <md-list-item v-if="isUserLoggedIn" to="/admin" v-on:click="menuVisible = false">
->>>>>>> menu entry for voting page
                         <md-icon>settings</md-icon>
                         <span class="nav-label">Admin</span>
                     </md-list-item>

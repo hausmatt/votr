@@ -8,6 +8,10 @@ const USER_VOTINGS = 'votings';
 export default class Repo {
     db = firebase.firestore();
 
+    /**
+     * @param userId
+     * @returns {Promise<any>}
+     */
     getCreatedVotingIdsByUser(userId) {
         return new Promise(((resolve, reject) => {
             this.db.collection(USER).doc(userId).onSnapshot(function (doc) {
@@ -19,20 +23,23 @@ export default class Repo {
         }));
     }
 
+    /**
+     * @param userId
+     * @param voting
+     * @returns {Promise<string>}
+     */
+    async addVoting(userId, voting) {
+        let docRef = await this.db.collection(VOTING).add(voting);
+        let id = docRef.id;
 
-    addVoting(userId, voting) {
-        return new Promise((resolve, reject) => {
-            this.db.collection(VOTING).add(voting)
-                .then(docRef => {
-                    let id = docRef.id;
-                    this.db.collection(USER).doc(userId).collection(USER_VOTINGS).add(id)
-                        .then(() => resolve(id))
-                        .catch(err => reject(err));
-                })
-                .catch(err => reject(err));
-        });
+        await this.db.collection(USER).doc(userId).collection(USER_VOTINGS).add(id);
+        return id;
     }
 
+    /**
+     * @param votingId
+     * @returns {Subject<any>}
+     */
     getVotingById(votingId) {
         let subject = new Subject();
         this.db.collection(VOTING).doc(votingId).onSnapshot(function (doc) {

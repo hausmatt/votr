@@ -22,9 +22,17 @@
                         <md-icon>info</md-icon>
                         <span>About</span>
                     </md-list-item>
-                    <md-list-item to="/admin" v-on:click="menuVisible = false">
+                    <md-list-item v-if="isUserLoggedIn" to="/admin" v-on:click="menuVisible = false">
                         <md-icon>settings</md-icon>
                         <span>Admin</span>
+                    </md-list-item>
+                    <md-list-item v-if="!isUserLoggedIn" v-on:click="login">
+                        <md-icon>person</md-icon>
+                        <span>Login</span>
+                    </md-list-item>
+                    <md-list-item v-if="isUserLoggedIn" v-on:click="logout">
+                        <md-icon>person_outline</md-icon>
+                        <span>Logout</span>
                     </md-list-item>
                 </md-list>
             </md-app-drawer>
@@ -37,11 +45,25 @@
 </template>
 
 <script>
+import * as actionTypes from './store/actions'
 export default {
   name: 'App',
   data: () => ({
     menuVisible: false
-  })
+  }),
+  computed: {
+    isUserLoggedIn () {
+      return this.$store.getters.isUserLoggedIn()
+    }
+  },
+  methods: {
+    login: function () {
+      this.$store.dispatch(actionTypes.LOGIN_WITH_GOOGLE)
+    },
+    logout: function () {
+      this.$store.dispatch(actionTypes.LOGOUT)
+    }
+  }
 }
 </script>
 

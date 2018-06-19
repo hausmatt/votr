@@ -14,7 +14,7 @@
                         <md-icon>home</md-icon>
                         <span class="nav-label">Home</span>
                     </md-list-item>
-                    <md-list-item v-if="isUserLoggedIn" to="/admin" v-on:click="menuVisible = false">
+                    <md-list-item v-if="isUserLoggedIn" to="/admin/votings" v-on:click="menuVisible = false">
                         <md-icon>settings</md-icon>
                         <span class="nav-label">Admin</span>
                     </md-list-item>

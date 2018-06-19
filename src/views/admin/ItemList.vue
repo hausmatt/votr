@@ -1,12 +1,5 @@
 <template>
     <div class="item-list">
-
-        <div class="md-layout md-gutter actions md-alignment-top-right">
-            <div class="md-layout-item md-size-15">
-                <ItemCreator/>
-            </div>
-        </div>
-
         <md-table>
             <md-table-row>
                 <md-table-head>ID</md-table-head>
@@ -23,13 +16,11 @@
 
 <script>
 import ItemListEntry from './ItemListEntry.vue';
-import ItemCreator from './ItemCreator';
 
 export default {
   name: 'ItemList',
   components: {
     ItemListEntry,
-    ItemCreator
   },
   props: {
     entries: Array

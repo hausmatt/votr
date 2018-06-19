@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'ItemListEntry',
+  name: 'VotingItemListEntry',
   props: {
     entry: Object
   }

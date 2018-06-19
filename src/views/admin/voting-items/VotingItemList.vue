@@ -1,12 +1,5 @@
 <template>
     <div class="item-list">
-
-        <div class="md-layout md-gutter actions md-alignment-top-right">
-            <div class="md-layout-item md-size-15">
-                <ItemCreator/>
-            </div>
-        </div>
-
         <md-table>
             <md-table-row>
                 <md-table-head>ID</md-table-head>
@@ -15,21 +8,19 @@
                 <md-table-head>Type</md-table-head>
             </md-table-row>
 
-            <ItemListEntry v-for="entry in entries" :key="entry.id" v-bind:entry="entry"
+            <VotingItemListEntry v-for="entry in entries" :key="entry.id" v-bind:entry="entry"
                            v-on:remove-entry="removeEntry"/>
         </md-table>
     </div>
 </template>
 
 <script>
-import ItemListEntry from './ItemListEntry.vue';
-import ItemCreator from './ItemCreator';
+import VotingItemListEntry from './VotingItemListEntry.vue';
 
 export default {
-  name: 'ItemList',
+  name: 'VotingItemList',
   components: {
-    ItemListEntry,
-    ItemCreator
+      VotingItemListEntry,
   },
   props: {
     entries: Array

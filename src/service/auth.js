@@ -9,4 +9,8 @@ export default class Auth {
   static logout () {
     return firebase.auth().signOut()
   }
+
+  static getCurrentUser () {
+    return firebase.auth().currentUser
+  }
 }

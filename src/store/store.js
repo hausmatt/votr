@@ -17,8 +17,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    [actionTypes.LOGIN_SUCCESSFUL] (state) {
+    [actionTypes.LOGIN_SUCCESSFUL] (state, payload) {
       state.auth.loggedIn = true
+      state.auth.user = {...payload.user}
     },
     [actionTypes.LOGIN_FAILURE] (state) {
       state.auth.loggedIn = false
@@ -30,7 +31,18 @@ export default new Vuex.Store({
   actions: {
     [actionTypes.LOGIN_WITH_GOOGLE] ({commit}) {
       Auth.loginWithGoogle()
-        .then(() => commit(actionTypes.LOGIN_SUCCESSFUL))
+        .then((login) => {
+          console.log(login)
+          return commit({
+            type: actionTypes.LOGIN_SUCCESSFUL,
+            user: {
+              uid: login.user.uid,
+              displayName: login.user.displayName,
+              email: login.user.email,
+              photoUrl: login.user.photoUrl
+            }
+          })
+        })
         .catch(() => commit(actionTypes.LOGIN_FAILURE))
     },
     [actionTypes.LOGOUT] ({commit}) {
@@ -42,6 +54,13 @@ export default new Vuex.Store({
   getters: {
     isUserLoggedIn: (state) => () => {
       return state.auth.loggedIn
+    },
+    userDisplayName: (state) => () => {
+      if (state.auth.user) {
+        return state.auth.user.displayName
+      } else {
+        return undefined
+      }
     }
   }
 })

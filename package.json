@@ -12,6 +12,7 @@
   "dependencies": {
     "firebase": "^5.0.4",
     "register-service-worker": "^1.0.0",
+    "rxjs": "^6.2.1",
     "vue": "^2.5.16",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1",
@@ -38,9 +39,6 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "lint-staged": {
     "*.js": [
       "vue-cli-service lint",

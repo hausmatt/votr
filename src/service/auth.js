@@ -1,16 +1,16 @@
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
 
 export default class Auth {
   static loginWithGoogle () {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    return firebase.auth().signInWithPopup(provider)
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth().signInWithPopup(provider);
   }
 
   static logout () {
-    return firebase.auth().signOut()
+    return firebase.auth().signOut();
   }
 
   static getCurrentUser () {
-    return firebase.auth().currentUser
+    return firebase.auth().currentUser;
   }
 }

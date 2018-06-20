@@ -17,11 +17,16 @@ export default {
         firestore.settings(settings);
     },
 
-    /**
-     * @param userId
-     * @param voting
-     * @returns {Promise<void>}
-     */
+    async loadVotings(userId) {
+        let votingSubject = new Rx.Subject();
+        db.collection(USER_VOTINGS).doc(userId).onSnapshot(function (doc) {
+            if(doc.exists){
+                votingSubject.next(doc.data());
+            }
+        });
+        return votingSubject;
+    },
+
     async addVoting(userId, voting) {
         let existingVotings = await this.getExistingVotings(userId);
         existingVotings.push({...voting, uid: uuidv4()});

@@ -66,6 +66,10 @@ export default {
             }]
         }],
         apiCalls: {
+            loadVotings: {
+                loading: false,
+                success: false
+            },
             addVoting: {
                 loading: false,
                 error: undefined,
@@ -79,6 +83,13 @@ export default {
         }
     },
     mutations: {
+        [actionTypes.LOAD_VOTINGS](state) {
+            state.apiCalls.loadVotings.loading = true;
+        },
+        [actionTypes.VOTINGS_LOADED](state,) {
+            state.apiCalls.loadVotings.loading = false;
+            state.apiCalls.loadVotings.success = true;
+        },
         [actionTypes.ADD_VOTING](state) {
             state.apiCalls.addVoting.loading = true;
         },
@@ -103,6 +114,13 @@ export default {
         }
     },
     actions: {
+        async [actionTypes.LOAD_VOTINGS]({commit, state, rootState}) {
+            commit(actionTypes.LOAD_VOTINGS);
+            Repo.loadVotings(rootState.auth.user.uid)
+                .subscribe(next => {
+                    commit(actionTypes.VOTINGS_LOADED, next)
+                });
+        },
         async [actionTypes.ADD_VOTING]({commit, state, rootState}, voting) {
             commit(actionTypes.ADD_VOTING);
             try {

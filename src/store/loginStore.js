@@ -14,7 +14,7 @@ export default {
     mutations: {
         [actionTypes.LOGIN_SUCCESSFUL](state, payload) {
             state.auth.loggedIn = true;
-            state.auth.user = {...payload.user};
+            state.auth.user = {...payload};
         },
         [actionTypes.LOGIN_FAILURE](state) {
             state.auth.loggedIn = false;

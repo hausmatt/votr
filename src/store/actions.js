@@ -3,8 +3,9 @@ export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
-export const LOAD_ADMIN_USER = 'LOAD_ADMIN_USER';
-export const ADMIN_USER_LOADED = 'ADMIN_USER_LOADED';
+export const LOAD_VOTINGS = 'LOAD_VOTINGS';
+export const VOTINGS_LOADED = 'VOTINGS_LOADED';
+export const LOAD_VOTINGS_ERROR = 'LOAD_VOTINGS_ERROR';
 
 export const ADD_VOTING = 'ADD_VOTING';
 export const VOTING_ADDED = 'VOTING_ADDED';

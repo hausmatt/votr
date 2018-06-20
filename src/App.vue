@@ -41,26 +41,31 @@
 </template>
 
 <script>
-import * as actionTypes from './store/actions'
-export default {
-  name: 'App',
-  data: () => ({
-    menuVisible: false
-  }),
-  computed: {
-    isUserLoggedIn () {
-      return this.$store.getters.isUserLoggedIn()
+    import * as actionTypes from './store/actions'
+
+    export default {
+        name: 'App',
+        data: () => ({
+            menuVisible: false
+        }),
+        computed: {
+            isUserLoggedIn() {
+                return this.$store.getters.isUserLoggedIn()
+            }
+        },
+        methods: {
+            login: function () {
+                this.$store.dispatch(actionTypes.LOGIN_WITH_GOOGLE);
+            },
+            logout: function () {
+                this.$store.dispatch(actionTypes.LOGOUT);
+                this.$router.push({path: `/`});
+            }
+        },
+        created: function () {
+            this.$router.push({path: `/`});
+        }
     }
-  },
-  methods: {
-    login: function () {
-      this.$store.dispatch(actionTypes.LOGIN_WITH_GOOGLE)
-    },
-    logout: function () {
-      this.$store.dispatch(actionTypes.LOGOUT)
-    }
-  }
-}
 </script>
 
 <style lang="scss" scoped>

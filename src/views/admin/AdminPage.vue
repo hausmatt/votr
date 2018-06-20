@@ -20,7 +20,7 @@
         },
         computed: {
             userName() {
-                return this.$store.getters.userDisplayName()
+                return this.$store.getters.userDisplayName
             },
             loadingData(){
                 return this.$store.state.apiCalls.adminUser.loading;

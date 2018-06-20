@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Voting :voting="this.voting"/>
+        <Voting :voting="this.voting[0]"/>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     voting () {
-      return this.$store.state.voting;
+      return this.$store.state.auth.user.votings;
     }
   }
 };

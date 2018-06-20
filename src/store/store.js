@@ -23,6 +23,54 @@ export default new Vuex.Store({
           text: 'This is so awesome!',
           timestamp: Date.now()
         }]
+      },{
+        id: 125,
+        title: 'Another',
+        description: 'Another description',
+        ratings: [5, 4, 4.5],
+        comments: [{
+          id: 51544,
+          text: 'This is so awesome!',
+          timestamp: Date.now()
+        }]
+      },{
+        id: 126,
+        title: 'Another',
+        description: 'Another description',
+        ratings: [5, 4, 4.5],
+        comments: [{
+          id: 51545,
+          text: 'This is so awesome!',
+          timestamp: Date.now()
+        }]
+      },{
+        id: 127,
+        title: 'Another',
+        description: 'Another description',
+        ratings: [5, 4, 4.5],
+        comments: [{
+          id: 51546,
+          text: 'This is so awesome!',
+          timestamp: Date.now()
+        }]
+      },{
+        id: 124,
+        title: 'Second Item',
+        description: 'This is also an item! Yay! Loop Loop!',
+        ratings: [3,5,4,3,2,5,4.5],
+        comments: [{
+          id: 102,
+          text: 'comment1',
+          timestamp: Date.now()
+        },{
+          id: 103,
+          text: 'comment2',
+          timestamp: Date.now()
+        },{
+          id: 104,
+          text: 'comment3',
+          timestamp: Date.now()
+        }]
       }]
     }
   },

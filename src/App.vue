@@ -14,6 +14,10 @@
                         <md-icon>home</md-icon>
                         <span class="nav-label">Home</span>
                     </md-list-item>
+                    <md-list-item to="/voting" v-on:click="menuVisible = false">
+                        <md-icon>stars</md-icon>
+                        <span class="nav-label">Voting</span>
+                    </md-list-item>
                     <md-list-item v-if="isUserLoggedIn" to="/admin/votings" v-on:click="menuVisible = false">
                         <md-icon>settings</md-icon>
                         <span class="nav-label">Admin</span>

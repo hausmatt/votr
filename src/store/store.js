@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import * as actionTypes from './actions';
 import Auth from '../service/auth';
 import Repo from '../service/repo';
+import voting from '../service/voting';
 
 Vue.use(Vuex);
 
@@ -31,7 +32,9 @@ export default new Vuex.Store({
                 error: undefined,
                 success: false
             }
-        }
+        },
+        votingItems: [],
+        votings: []
     },
     mutations: {
         [actionTypes.LOGIN_SUCCESSFUL](state, payload) {
@@ -152,7 +155,22 @@ export default new Vuex.Store({
                     }
                 });
             }
-        }
+        },
+        async [actionTypes.LOAD_VOTING_ITEMS]({commit}, votingId) {
+            voting.getVotingItems(votingId)
+                .subscribe(n => commit({
+                    type: actionTypes.VOTING_ITEMS_LOADED,
+                    votingItems: n
+                }));
+        },
+        async [actionTypes.LOAD_VOTINGS]({commit, state}) {
+            voting.getVotingsByUser(state.auth.user.uid)
+                .subscribe(n => commit({
+                    type: actionTypes.VOTINGS_LOADED,
+                    votings: n
+                }));
+        },
+
     },
     getters: {
         isUserLoggedIn: (state) => () => {
@@ -168,9 +186,11 @@ export default new Vuex.Store({
         adminVotings: (state) => () => {
             return state.auth.user.votings;
         },
-        votingById: (state) => (votingUid) => {
-            let voting = state.auth.user.votings.find(v => v.uid === votingUid);
-            return voting ? voting.items : [];
-        }
+        votingItems: (state) => () => {
+            return state.votingItems;
+        },
+        votings: (state) => () => {
+            return state.votings;
+        },
     }
 });

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../views/HomePage.vue';
 import AdminPage from '../views/admin/AdminPage';
-import Auth from '../service/auth';
 import VotingPage from '@/views/VotingPage';
 import VotingsPage from '@/views/admin/votings/VotingsPage';
 import VotingItemsPage from '@/views/admin/voting-items/VotingItemsPage';
@@ -40,17 +39,6 @@ let router = new Router({
             ]
         }
     ]
-});
-
-router.beforeEach((to, from, next) => {
-    let currentUser = Auth.getCurrentUser();
-    let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-
-    if (requiresAuth && !currentUser) {
-        next('');
-    } else {
-        next();
-    }
 });
 
 export default router;

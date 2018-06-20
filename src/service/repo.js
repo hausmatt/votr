@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
-import uuidv4 from 'uuid/v4'
+import uuidv4 from 'uuid/v4';
+import * as Rx from "rxjs";
 
 const USER = 'user';
 const VOTING = 'voting';
@@ -62,16 +63,16 @@ export default {
 
     /**
      * @param userUid
-     * @returns {Promise<any>}
+     * @returns {Subject<any>}
      */
-    async loadUser(userUid) {
-        return new Promise(((resolve, reject) => {
-            db.collection(USER).doc(userUid).onSnapshot(function (doc) {
-                resolve(doc.exists ? doc.data() : null);
-            }, function (err) {
-                reject(err);
-            })
-        }));
+    loadUser(userUid){
+        let userSubject = new Rx.Subject();
+        db.collection(USER).doc(userUid).onSnapshot(function (doc) {
+            if(doc.exists){
+                userSubject.next(doc.data());
+            }
+        });
+        return userSubject;
     },
 
 }

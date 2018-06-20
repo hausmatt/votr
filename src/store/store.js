@@ -53,7 +53,6 @@ export default new Vuex.Store({
             state.apiCalls.addVoting.loading = true;
         },
         [actionTypes.VOTING_ADDED](state, payload) {
-            state.auth.user.votings.push(payload.voting);
             state.apiCalls.addVoting.loading = false;
             state.apiCalls.addVoting.success = true;
         },
@@ -97,11 +96,11 @@ export default new Vuex.Store({
         },
         async [actionTypes.LOAD_ADMIN_USER]({commit, state}) {
             commit({type: actionTypes.LOAD_ADMIN_USER});
-            let fullUser = await Repo.loadUser(state.auth.user.uid);
-            commit({
-                type: actionTypes.ADMIN_USER_LOADED,
-                user: fullUser
-            });
+            Repo.loadUser(state.auth.user.uid)
+                .subscribe(next => commit({
+                    type: actionTypes.ADMIN_USER_LOADED,
+                    user: next
+                }));
         },
         async [actionTypes.ADD_VOTING]({commit, state}, voting) {
             commit(actionTypes.ADD_VOTING);

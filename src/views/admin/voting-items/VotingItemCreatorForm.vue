@@ -1,5 +1,5 @@
 <template>
-    <form novalidate class="md-layout" @submit.prevent="validateUser">
+    <form novalidate class="md-layout" @submit.prevent="validateItem">
         <div class="md-layout md-gutter">
 
             <div class="md-layout-item md-small-size-100">
@@ -43,10 +43,10 @@
         <md-progress-bar md-mode="indeterminate" v-if="sending"/>
 
         <md-dialog-actions>
-            <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
+            <md-button type="submit" class="md-primary" :disabled="sending">Create item</md-button>
         </md-dialog-actions>
 
-        <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+        <md-snackbar :md-active.sync="itemSaved">The item {{ lastItem }} was saved with success!</md-snackbar>
     </form>
 </template>
 
@@ -63,9 +63,9 @@ export default {
       description: null,
       votingType: 'stars'
     },
-    userSaved: false,
+    itemSaved: false,
     sending: false,
-    lastUser: null
+    lastItem: null
   }),
   validations: {
     form: {
@@ -92,15 +92,15 @@ export default {
         };
       }
     },
-    saveUser () {
+    saveItem () {
       this.sending = true;
       // TODO
     },
-    validateUser () {
+    validateItem () {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.saveUser();
+        this.saveItem();
       }
     }
   }

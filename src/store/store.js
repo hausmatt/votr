@@ -14,20 +14,6 @@ export default new Vuex.Store({
                 uid: undefined,
                 votings: []
             }
-        },
-        voting: {
-            id: 1,
-            items: [{
-                id: 123,
-                title: 'First Item',
-                description: 'This is an item! Yay! 42!',
-                ratings: [5, 4, 4.5],
-                comments: [{
-                    id: 101010,
-                    text: 'This is so awesome!',
-                    timestamp: Date.now()
-                }]
-            }]
         }
     },
     mutations: {

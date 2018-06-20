@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card v-for="item in voting.items" :key="item.id">
+    <md-card v-for="item in sortedItems" :key="item.id">
       <md-card-media>
       </md-card-media>
 
@@ -8,6 +8,8 @@
         <div class="md-title">{{item.title}}</div>
         <div class="md-subhead">{{item.description}}</div>
       </md-card-header>
+
+      <Rating :ratings="item.ratings" :is-input="true"/>
 
       <md-card-content>
         <md-list class="md-double-line">
@@ -24,10 +26,27 @@
 </template>
 
 <script>
+import Rating from './Rating';
+import VotingUtil from '../service/votingUtil';
+
 export default {
   name: 'Voting',
+  data: function() {
+    return {
+    };
+  },
   props: {
     voting: Object
+  },
+  components: {
+    Rating
+  },
+  computed: {
+      sortedItems() {
+          let result = this.voting.items.slice();
+          result.sort((a,b) => {return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)});
+          return result;
+      }
   }
 };
 </script>

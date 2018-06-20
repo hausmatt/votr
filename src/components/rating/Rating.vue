@@ -13,7 +13,7 @@
 
 <script>
     import RatingStar from './RatingStar';
-    import VotingUtil from '../service/votingUtil';
+    import VotingUtil from '../../service/votingUtil';
 
     export default {
         name: "Rating",

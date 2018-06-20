@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Rating from './Rating';
+import Rating from './rating/Rating';
 import VotingUtil from '../service/votingUtil';
 
 export default {

@@ -21,6 +21,11 @@ export default new Vuex.Store({
                 error: undefined,
                 success: false
             },
+            removeVoting: {
+                loading: false,
+                error: undefined,
+                success: false
+            },
             adminUser: {
                 loading: false,
                 error: undefined,
@@ -57,8 +62,19 @@ export default new Vuex.Store({
             state.apiCalls.addVoting.success = true;
         },
         [actionTypes.VOTING_ADDED_ERROR](state, payload) {
-            state.apiCalls.loading.addVoting.error = payload.error;
+            state.apiCalls.addVoting.error = payload.error;
             state.apiCalls.addVoting.loading = false;
+        },
+        [actionTypes.REMOVE_VOTING](state) {
+            state.apiCalls.removeVoting.loading = false;
+        },
+        [actionTypes.VOTING_REMOVED](state) {
+            state.apiCalls.removeVoting.loading = false;
+            state.apiCalls.removeVoting.success = true;
+        },
+        [actionTypes.REMOVE_VOTING_ERROR](state, payload) {
+            state.apiCalls.removeVoting.error = payload.error;
+            state.apiCalls.removeVoting.loading = false;
         }
     },
     actions: {
@@ -97,10 +113,12 @@ export default new Vuex.Store({
         async [actionTypes.LOAD_ADMIN_USER]({commit, state}) {
             commit({type: actionTypes.LOAD_ADMIN_USER});
             Repo.loadUser(state.auth.user.uid)
-                .subscribe(next => commit({
-                    type: actionTypes.ADMIN_USER_LOADED,
-                    user: next
-                }));
+                .subscribe(next => {
+                    commit({
+                        type: actionTypes.ADMIN_USER_LOADED,
+                        user: next
+                    })
+                });
         },
         async [actionTypes.ADD_VOTING]({commit, state}, voting) {
             commit(actionTypes.ADD_VOTING);
@@ -114,6 +132,21 @@ export default new Vuex.Store({
                 console.error('ADD_VOTING failed', error);
                 commit({
                     type: actionTypes.VOTING_ADDED_ERROR,
+                    error: {
+                        message: 'add voting failed'
+                    }
+                });
+            }
+        },
+        async [actionTypes.REMOVE_VOTING]({commit, state}, votingId) {
+            commit(actionTypes.REMOVE_VOTING);
+            try {
+                await Repo.removeVoting(state.auth.user.uid, votingId);
+                commit({type: actionTypes.VOTING_REMOVED});
+            } catch (error) {
+                console.error('REMOVE_VOTING failed', error);
+                commit({
+                    type: actionTypes.REMOVE_VOTING_ERROR,
                     error: {
                         message: 'add voting failed'
                     }

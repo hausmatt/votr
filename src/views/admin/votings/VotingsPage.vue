@@ -16,7 +16,7 @@
             votings() {
                 return this.$store.getters.adminVotings();
             }
-        },
+        }
     };
 </script>
 

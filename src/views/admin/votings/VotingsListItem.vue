@@ -1,12 +1,12 @@
 <template>
     <div>
-        <md-list-item>
-            <div class="md-list-item-text" v-on:click="$emit('voting-selected', voting)">
+        <md-list-item @click="$emit('voting-selected', voting)">
+            <div class="md-list-item-text">
                 <span>{{voting.name}}</span>
                 <span>Type: {{voting.type}}</span>
             </div>
 
-            <md-button v-on:click="$emit('remove-voting', voting)" class="md-icon-button md-list-action">
+            <md-button @click="deleteClick" class="md-icon-button md-list-action">
                 <md-icon class="md-primary">delete</md-icon>
             </md-button>
         </md-list-item>
@@ -26,7 +26,12 @@
         data: function () {
             return {};
         },
-        methods: {}
+        methods: {
+            deleteClick: function(event){
+                event.stopPropagation();
+                this.$emit('remove-voting', this.voting);
+            }
+        }
     };
 </script>
 

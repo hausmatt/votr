@@ -20,6 +20,7 @@
     import VotingListItem from './VotingsListItem';
     import VotingCreator from './VotingCreator';
     import ActionBar from '@/components/ActionBar';
+    import {REMOVE_VOTING} from "../../../store/actions";
 
     export default {
         name: 'VotingsList',
@@ -33,7 +34,7 @@
         },
         methods: {
             removeVoting: function (voting) {
-                alert('remove voting: ' + voting);
+                this.$store.dispatch(REMOVE_VOTING, voting.uid);
             },
             votingSelected: function (voting) {
                 this.$router.push({path: `/admin/${voting.uid}/voting-items`});

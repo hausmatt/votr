@@ -28,6 +28,11 @@ export default {
         return db.collection(USER).doc(userId).set({votings: existingVotings}, {merge: true});
     },
 
+    async removeVoting(userId, votingId) {
+        let existingVotings = await this.getExistingVotings(userId);
+        return db.collection(USER).doc(userId).set({votings: existingVotings.filter(voting => voting.uid !== votingId)}, {merge: true});
+    },
+
     /**
      * @param userUid
      * @param votingUid

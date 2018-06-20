@@ -9,32 +9,31 @@
             </md-table-row>
 
             <VotingItemListEntry v-for="entry in entries" :key="entry.uid" v-bind:entry="entry"
-                           v-on:remove-entry="removeEntry"/>
+                                 v-on:remove-entry="removeEntry"/>
         </md-table>
     </div>
 </template>
 
 <script>
-import VotingItemListEntry from './VotingItemListEntry.vue';
+    import VotingItemListEntry from './VotingItemListEntry.vue';
 
-export default {
-  name: 'VotingItemList',
-  components: {
-      VotingItemListEntry,
-  },
-  props: {
-    entries: Array
-  },
-  data: function () {
-    return {
+    export default {
+        name: 'VotingItemList',
+        components: {
+            VotingItemListEntry
+        },
+        props: {
+            entries: Array
+        },
+        data: function () {
+            return {};
+        },
+        methods: {
+            removeEntry: function (entry) {
+                alert(`remove entry: ${entry.id}`);
+            }
+        }
     };
-  },
-  methods: {
-    removeEntry: function (entry) {
-      alert(`remove entry: ${entry.id}`);
-    }
-  }
-};
 </script>
 
 <style lang="scss" scoped>

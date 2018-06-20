@@ -9,20 +9,15 @@
         <div class="md-subhead">{{item.description}}</div>
       </md-card-header>
 
-      <md-card-actions>
-        <md-button>Action</md-button>
-        <md-button>Action</md-button>
-      </md-card-actions>
-
       <md-card-content>
-        <ul v-for="comment in item.comments" :key="comment.id">
-          <li>
-            {{comment.text}}
-          </li>
-          <li>
-            {{comment.timestamp}}
-          </li>
-        </ul>
+        <md-list class="md-double-line">
+          <md-list-item v-for="comment in item.comments" :key="comment.id">
+            <div class="md-list-item-text">
+              <span>{{comment.text}}</span>
+              <span>{{new Date(comment.timestamp).toLocaleString()}}</span>
+            </div>
+          </md-list-item>
+        </md-list>
       </md-card-content>
     </md-card>
   </div>

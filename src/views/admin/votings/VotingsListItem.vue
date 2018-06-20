@@ -1,11 +1,18 @@
 <template>
-    <md-table-row class="item-list-entry" v-on:click="$emit('voting-selected', voting)">
-        <md-table-cell>{{voting.name}}</md-table-cell>
-        <md-table-cell>{{voting.type}}</md-table-cell>
-        <md-table-cell>
-            <md-button class="md-accent" v-on:click="$emit('remove-voting', voting)">Remove</md-button>
-        </md-table-cell>
-    </md-table-row>
+    <div>
+        <md-list-item>
+            <div class="md-list-item-text" v-on:click="$emit('voting-selected', voting)">
+                <span>{{voting.name}}</span>
+                <span>Type: {{voting.type}}</span>
+            </div>
+
+            <md-button v-on:click="$emit('remove-voting', voting)" class="md-icon-button md-list-action">
+                <md-icon class="md-primary">delete</md-icon>
+            </md-button>
+        </md-list-item>
+
+        <md-divider/>
+    </div>
 </template>
 
 <script>

@@ -1,16 +1,16 @@
 import * as firebase from 'firebase';
 
-export default class Auth {
-  static loginWithGoogle () {
+export default {
+  async loginWithGoogle () {
     const provider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithPopup(provider);
-  }
+  },
 
-  static logout () {
+  async logout () {
     return firebase.auth().signOut();
-  }
+  },
 
-  static getCurrentUser () {
+  async getCurrentUser () {
     return firebase.auth().currentUser;
   }
 }

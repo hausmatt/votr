@@ -1,27 +1,19 @@
 import * as firebase from 'firebase';
-import {Subject} from "rxjs";
 
 const USER = 'user';
 const VOTING = 'voting';
 const USER_VOTINGS = 'votings';
 
-export default class Repo {
-    db = firebase.firestore();
+let db;
 
-    /**
-     * @param userId
-     * @returns {Promise<any>}
-     */
-    getCreatedVotingIdsByUser(userId) {
-        return new Promise(((resolve, reject) => {
-            this.db.collection(USER).doc(userId).onSnapshot(function (doc) {
-                let data = doc.data();
-                resolve(data.votings);
-            }, function (err) {
-                reject(err);
-            })
-        }));
-    }
+export default {
+
+    init() {
+        db = firebase.firestore();
+        const firestore = firebase.firestore();
+        const settings = {timestampsInSnapshots: true};
+        firestore.settings(settings);
+    },
 
     /**
      * @param userId
@@ -29,24 +21,32 @@ export default class Repo {
      * @returns {Promise<string>}
      */
     async addVoting(userId, voting) {
-        let docRef = await this.db.collection(VOTING).add(voting);
-        let id = docRef.id;
-
-        await this.db.collection(USER).doc(userId).collection(USER_VOTINGS).add(id);
-        return id;
-    }
+        let existingUserDocSnapshot = await db.collection(USER).doc(userId).get();
+        let existingVotings = existingUserDocSnapshot.data().votings;
+        existingVotings.push(voting);
+        return db.collection(USER).doc(userId).set({votings: existingVotings}, {merge: true});
+    },
 
     /**
-     * @param votingId
-     * @returns {Subject<any>}
+     * @param user
+     * @returns {Promise<void>}
      */
-    getVotingById(votingId) {
-        let subject = new Subject();
-        this.db.collection(VOTING).doc(votingId).onSnapshot(function (doc) {
-            let id = doc.id;
-            let data = doc.data();
-            subject.next({...data, id});
-        });
-        return subject;
-    }
+    async updateUser(user) {
+        return db.collection(USER).doc(user.uid).set(user, {merge: true});
+    },
+
+    /**
+     * @param userUid
+     * @returns {Promise<any>}
+     */
+    async loadUser(userUid) {
+        return new Promise(((resolve, reject) => {
+            db.collection(USER).doc(userUid).onSnapshot(function (doc) {
+                resolve(doc.exists ? doc.data() : null);
+            }, function (err) {
+                reject(err);
+            })
+        }));
+    },
+
 }

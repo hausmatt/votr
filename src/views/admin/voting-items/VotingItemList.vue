@@ -8,7 +8,7 @@
                 <md-table-head>Type</md-table-head>
             </md-table-row>
 
-            <VotingItemListEntry v-for="entry in entries" :key="entry.id" v-bind:entry="entry"
+            <VotingItemListEntry v-for="entry in entries" :key="entry.uid" v-bind:entry="entry"
                            v-on:remove-entry="removeEntry"/>
         </md-table>
     </div>

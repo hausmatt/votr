@@ -1,24 +1,23 @@
 <template>
-   <VotingsList/>
+    <VotingsList v-bind:votings="votings"/>
 </template>
 
 <script>
-import VotingsList from './VotingsList';
+    import VotingsList from './VotingsList';
 
-export default {
-  name: 'Votings',
-  components: {
-      VotingsList
-  },
-  props: {
-  },
-  data: function () {
-    return {
+    export default {
+        name: 'Votings',
+        components: {
+            VotingsList
+        },
+        props: {},
+        methods: {},
+        computed: {
+            votings() {
+                return this.$store.getters.adminVotings();
+            }
+        },
     };
-  },
-  methods: {
-  }
-};
 </script>
 
 <style lang="scss" scoped>

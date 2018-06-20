@@ -6,6 +6,7 @@ import './registerServiceWorker';
 import './core/material';
 import firebase from 'firebase/app';
 import {firebaseConfig} from './fbConfig';
+import repo from "./service/repo";
 
 Vue.config.productionTip = false;
 
@@ -19,5 +20,8 @@ if (!app) {
     store,
     render: h => h(App)
   });
+
+  repo.init();
+
   app.$mount('#app');
 }

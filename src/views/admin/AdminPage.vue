@@ -6,21 +6,24 @@
 </template>
 
 <script>
-import VotingItemList from './voting-items/VotingItemList';
+    import VotingItemList from './voting-items/VotingItemList';
+    import {LOAD_ADMIN_USER} from "../../store/actions";
 
-export default {
-  name: 'AdminPage',
-  components: {
-      VotingItemList
-  },
-  data: function () {
-    return {
+    export default {
+        name: 'AdminPage',
+        components: {
+            VotingItemList
+        },
+        data: function () {
+            return {}
+        },
+        computed: {
+            userName() {
+                return this.$store.getters.userDisplayName()
+            }
+        },
+        created: function () {
+            this.$store.dispatch(LOAD_ADMIN_USER);
+        }
     }
-  },
-  computed: {
-    userName () {
-      return this.$store.getters.userDisplayName()
-    }
-  }
-}
 </script>

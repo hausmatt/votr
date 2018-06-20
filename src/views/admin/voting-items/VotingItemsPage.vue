@@ -26,27 +26,9 @@
             VotingItemCreator
         },
         props: {},
-        data: function () {
-            return {};
-        },
         computed: {
             entries: function () {
-                //TODO: filter all votings by votingId
-                //return this.$route.params.votingId
-                return [
-                    {
-                        id: '5653-asdfsd-23423-dfds',
-                        name: 'The Departed',
-                        description: 'Everybody dies in the end',
-                        type: 'Rating'
-                    },
-                    {
-                        id: '12312-ggztjt-54232-koioweN',
-                        name: 'Inception',
-                        description: 'Blows your mind',
-                        type: 'Rating'
-                    }
-                ]
+                return this.$store.getters.votingById(this.$route.params.votingId);
             }
         },
         methods: {}
@@ -54,7 +36,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .back-button{
+    .back-button {
         display: block;
     }
 </style>

@@ -4,18 +4,15 @@
             <VotingCreator class="right"/>
         </ActionBar>
 
-        <md-table>
-            <md-table-row>
-                <md-table-head>Name</md-table-head>
-                <md-table-head>Type</md-table-head>
-            </md-table-row>
-
+        <md-list class="md-triple-line">
             <VotingListItem v-for="voting in votings"
                             v-bind:voting="voting"
                             v-on:remove-voting="removeVoting"
                             v-on:voting-selected="votingSelected"
                             :key="voting.uid"/>
-        </md-table>
+        </md-list>
+
+
     </div>
 </template>
 

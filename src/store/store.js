@@ -14,6 +14,18 @@ export default new Vuex.Store({
                 uid: undefined,
                 votings: []
             }
+        },
+        apiCalls: {
+            addVoting: {
+                loading: false,
+                error: undefined,
+                success: false
+            },
+            adminUser: {
+                loading: false,
+                error: undefined,
+                success: false
+            }
         }
     },
     mutations: {
@@ -29,9 +41,26 @@ export default new Vuex.Store({
             state.auth.loggedIn = false;
             state.auth.user = {};
         },
+        [actionTypes.LOAD_ADMIN_USER](state) {
+            state.apiCalls.adminUser.loading = true;
+        },
         [actionTypes.ADMIN_USER_LOADED](state, payload) {
             state.auth.user = {...payload.user};
+            state.apiCalls.adminUser.loading = false;
+            state.apiCalls.adminUser.success = true;
         },
+        [actionTypes.ADD_VOTING](state) {
+            state.apiCalls.addVoting.loading = true;
+        },
+        [actionTypes.VOTING_ADDED](state, payload) {
+            state.auth.user.votings.push(payload.voting);
+            state.apiCalls.addVoting.loading = false;
+            state.apiCalls.addVoting.success = true;
+        },
+        [actionTypes.VOTING_ADDED_ERROR](state, payload) {
+            state.apiCalls.loading.addVoting.error = payload.error;
+            state.apiCalls.addVoting.loading = false;
+        }
     },
     actions: {
         async [actionTypes.LOGIN_WITH_GOOGLE]({dispatch, commit}) {
@@ -67,12 +96,31 @@ export default new Vuex.Store({
             }
         },
         async [actionTypes.LOAD_ADMIN_USER]({commit, state}) {
+            commit({type: actionTypes.LOAD_ADMIN_USER});
             let fullUser = await Repo.loadUser(state.auth.user.uid);
             commit({
                 type: actionTypes.ADMIN_USER_LOADED,
                 user: fullUser
             });
         },
+        async [actionTypes.ADD_VOTING]({commit, state}, voting) {
+            commit(actionTypes.ADD_VOTING);
+            try {
+                await Repo.addVoting(state.auth.user.uid, voting);
+                commit({
+                    type: actionTypes.VOTING_ADDED,
+                    voting: voting
+                });
+            } catch (error) {
+                console.error('ADD_VOTING failed', error);
+                commit({
+                    type: actionTypes.VOTING_ADDED_ERROR,
+                    error: {
+                        message: 'add voting failed'
+                    }
+                });
+            }
+        }
     },
     getters: {
         isUserLoggedIn: (state) => () => {

@@ -5,3 +5,7 @@ export const LOGOUT = 'LOGOUT';
 
 export const LOAD_ADMIN_USER = 'LOAD_ADMIN_USER';
 export const ADMIN_USER_LOADED = 'ADMIN_USER_LOADED';
+
+export const ADD_VOTING = 'ADD_VOTING';
+export const VOTING_ADDED = 'VOTING_ADDED';
+export const VOTING_ADDED_ERROR = 'VOTING_ADDED_ERROR';

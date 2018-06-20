@@ -1,6 +1,7 @@
 <template>
     <div class="admin-page">
         <h3>Hi, {{userName}}</h3>
+        <md-progress-spinner v-if="loadingData" md-mode="indeterminate"/>
         <router-view></router-view>
     </div>
 </template>
@@ -20,6 +21,9 @@
         computed: {
             userName() {
                 return this.$store.getters.userDisplayName()
+            },
+            loadingData(){
+                return this.$store.state.apiCalls.adminUser.loading;
             }
         },
         created: function () {

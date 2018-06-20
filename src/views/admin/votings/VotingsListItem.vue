@@ -24,4 +24,10 @@
 </script>
 
 <style lang="scss" scoped>
+    .md-table-cell {
+        text-align: left;
+        .md-button {
+            float: right;
+        }
+    }
 </style>

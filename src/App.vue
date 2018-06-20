@@ -75,7 +75,7 @@ export default {
     }
 
     .md-drawer {
-        width: 25vw;
+        width: 230px;
     }
 
     .md-list-item .nav-label {

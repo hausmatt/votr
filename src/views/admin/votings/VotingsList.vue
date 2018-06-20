@@ -1,10 +1,8 @@
 <template>
     <div>
-        <div class="md-layout md-gutter actions md-alignment-top-right">
-            <div class="md-layout-item md-size-15">
-                <VotingCreator/>
-            </div>
-        </div>
+        <ActionBar>
+            <VotingCreator class="right"/>
+        </ActionBar>
 
         <md-table>
             <md-table-row>
@@ -23,12 +21,14 @@
 <script>
     import VotingListItem from './VotingsListItem';
     import VotingCreator from './VotingCreator';
+    import ActionBar from '@/components/ActionBar';
 
     export default {
         name: 'VotingsList',
         components: {
             VotingListItem,
-            VotingCreator
+            VotingCreator,
+            ActionBar
         },
         props: {},
         data: function () {

@@ -1,15 +1,11 @@
 <template>
     <div>
-        <div class="md-layout md-alignment-top-left">
-            <div class="md-layout-item md-size-80">
-                <md-button to="/admin/votings" class="md-icon-button back-button">
-                    <md-icon>arrow_back_ios</md-icon>
-                </md-button>
-            </div>
-            <div class="md-layout-item md-size-20">
-                <VotingItemCreator/>
-            </div>
-        </div>
+        <ActionBar>
+            <md-button to="/admin/votings" class="md-icon-button back-button left">
+                <md-icon>arrow_back_ios</md-icon>
+            </md-button>
+            <VotingItemCreator class="right"/>
+        </ActionBar>
         <VotingItemList v-bind:entries="entries"/>
     </div>
 
@@ -18,12 +14,14 @@
 <script>
     import VotingItemList from './VotingItemList';
     import VotingItemCreator from './VotingItemCreator';
+    import ActionBar from '@/components/ActionBar';
 
     export default {
         name: 'VotingItems',
         components: {
             VotingItemList,
-            VotingItemCreator
+            VotingItemCreator,
+            ActionBar
         },
         props: {},
         data: function () {
@@ -54,7 +52,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .back-button{
+    .back-button {
         display: block;
     }
 </style>

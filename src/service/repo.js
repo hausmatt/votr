@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import uuidv4 from 'uuid/v4'
 
 const USER = 'user';
 const VOTING = 'voting';
@@ -22,7 +23,7 @@ export default {
      */
     async addVoting(userId, voting) {
         let existingVotings = await this.getExistingVotings(userId);
-        existingVotings.push(voting);
+        existingVotings.push({...voting, uid: uuidv4()});
         return db.collection(USER).doc(userId).set({votings: existingVotings}, {merge: true});
     },
 
@@ -36,7 +37,7 @@ export default {
         let existingVotings = await this.getExistingVotings(userUid);
         let voting = existingVotings.find(v => v.uid === votingUid);
         if (voting) {
-            voting.items.push(item);
+            voting.items.push({...item, uid: uuidv4()});
         }
 
         return db.collection(USER).doc(userUid).set({votings: existingVotings}, {merge: true});

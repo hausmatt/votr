@@ -1,5 +1,4 @@
 import * as actionTypes from './actions';
-import Repo from '../service/repo';
 import voting from '../service/voting';
 
 export default {
@@ -34,7 +33,7 @@ export default {
         [actionTypes.ADD_VOTING](state) {
             state.apiCalls.addVoting.loading = true;
         },
-        [actionTypes.VOTING_ADDED](state,) {
+        [actionTypes.VOTING_ADDED](state) {
             state.apiCalls.addVoting.loading = false;
             state.apiCalls.addVoting.success = true;
         },
@@ -63,16 +62,16 @@ export default {
     actions: {
         async [actionTypes.LOAD_VOTINGS]({commit, state, rootState}) {
             commit(actionTypes.LOAD_VOTINGS);
-            Repo.loadVotings(rootState.login.auth.user.uid)
+            voting.getVotingsByUser(rootState.login.auth.user.uid)
                 .subscribe(next => {
                     commit(actionTypes.VOTINGS_LOADED, next)
                 });
         },
-        async [actionTypes.ADD_VOTING]({commit, state, rootState}, voting) {
+        async [actionTypes.ADD_VOTING]({commit, state, rootState}, v) {
             commit(actionTypes.ADD_VOTING);
             try {
-                await Repo.addVoting(rootState.login.auth.user.uid, voting);
-                commit(actionTypes.VOTING_ADDED, voting);
+                await voting.createVoting(rootState.login.auth.user.uid, v);
+                commit(actionTypes.VOTING_ADDED);
             } catch (error) {
                 console.error('ADD_VOTING failed', error);
                 commit({
@@ -86,8 +85,8 @@ export default {
         async [actionTypes.REMOVE_VOTING]({commit, state, rootState}, votingId) {
             commit(actionTypes.REMOVE_VOTING);
             try {
-                await Repo.removeVoting(rootState.login.auth.user.uid, votingId);
-                commit({type: actionTypes.VOTING_REMOVED});
+                await voting.removeVoting(votingId);
+                commit(actionTypes.VOTING_REMOVED);
             } catch (error) {
                 console.error('REMOVE_VOTING failed', error);
                 commit({

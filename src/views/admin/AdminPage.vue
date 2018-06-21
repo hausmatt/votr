@@ -8,7 +8,7 @@
 
 <script>
     import VotingItemList from './voting-items/VotingItemList';
-    import {LOAD_ADMIN_USER} from "../../store/actions";
+    import {LOAD_VOTINGS} from "../../store/actions";
 
     export default {
         name: 'AdminPage',
@@ -20,14 +20,14 @@
         },
         computed: {
             userName() {
-                return this.$store.getters.userDisplayName()
+                return this.$store.getters.userDisplayName
             },
             loadingData(){
-                return this.$store.state.apiCalls.adminUser.loading;
+                return this.$store.state.voting.apiCalls.loadVotings.loading;
             }
         },
         created: function () {
-            this.$store.dispatch(LOAD_ADMIN_USER);
+            this.$store.dispatch(LOAD_VOTINGS);
         }
     }
 </script>

@@ -2,7 +2,7 @@
     <form novalidate class="md-layout" @submit.prevent="validateItem">
         <div class="md-layout md-gutter">
 
-            <div class="md-layout-item md-small-size-100">
+            <div class="md-layout-item md-small-size-50">
                 <md-field :class="getValidationClass('name')">
                     <label for="name">Name</label>
                     <md-input name="name" id="name" v-model="form.name" :disabled="sending"/>
@@ -13,7 +13,7 @@
                 </md-field>
             </div>
 
-            <div class="md-layout-item md-small-size-100">
+            <div class="md-layout-item md-small-size-50">
                 <md-field :class="getValidationClass('description')">
                     <label for="description">Description</label>
                     <md-input name="description" id="description"
@@ -23,21 +23,6 @@
                     <span class="md-error" v-else-if="!$v.form.description.minlength">Invalid descriptione</span>
                 </md-field>
             </div>
-        </div>
-
-        <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100">
-                <md-field :class="getValidationClass('votingType')">
-                    <label for="voting-type">Type</label>
-                    <md-select name="votingType" id="voting-type" v-model="form.votingType" md-dense
-                               :disabled="sending">
-                        <md-option value="starts">Stars</md-option>
-                        <md-option value="oneToTen">One to ten</md-option>
-                    </md-select>
-                    <span class="md-error">The voting type is required</span>
-                </md-field>
-            </div>
-
         </div>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending"/>
@@ -60,8 +45,7 @@ export default {
   data: () => ({
     form: {
       name: null,
-      description: null,
-      votingType: 'stars'
+      description: null
     },
     itemSaved: false,
     sending: false,
@@ -76,9 +60,6 @@ export default {
       description: {
         required,
         minLength: minLength(3)
-      },
-      votingType: {
-        required
       }
     }
   },

@@ -66,12 +66,12 @@
         }),
         computed: {
             sending: function () {
-                return this.$store.state.apiCalls.addVoting.loading;
+                return this.$store.state.voting.apiCalls.addVoting.loading;
             }
         },
         watch: {
             sending: function (newValue, oldValue) {
-                if (!newValue && oldValue && this.$store.state.apiCalls.addVoting.success) {
+                if (!newValue && oldValue && this.$store.state.voting.apiCalls.addVoting.success) {
                     this.votingSaved = true;
                     this.showDialog = false;
                 }

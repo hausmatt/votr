@@ -27,7 +27,7 @@
         props: {},
         computed: {
             entries: function () {
-                return this.$store.getters.votingItems();
+                return this.$store.getters.votingItems;
             }
         },
         methods: {},

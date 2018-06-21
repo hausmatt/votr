@@ -36,56 +36,61 @@
 </template>
 
 <script>
-import {validationMixin} from 'vuelidate';
-import {minLength, required} from 'vuelidate/lib/validators';
+    import {validationMixin} from 'vuelidate';
+    import {minLength, required} from 'vuelidate/lib/validators';
 
-export default {
-  name: 'VotingItemCreatorForm',
-  mixins: [validationMixin],
-  data: () => ({
-    form: {
-      name: null,
-      description: null
-    },
-    itemSaved: false,
-    sending: false,
-    lastItem: null
-  }),
-  validations: {
-    form: {
-      name: {
-        required,
-        minLength: minLength(3)
-      },
-      description: {
-        required,
-        minLength: minLength(3)
-      }
-    }
-  },
-  methods: {
-    getValidationClass (fieldName) {
-      const field = this.$v.form[fieldName];
+    export default {
+        name: 'VotingItemCreatorForm',
+        mixins: [validationMixin],
+        data: () => ({
+            form: {
+                name: null,
+                description: null
+            },
+            itemSaved: false,
+            sending: false,
+            lastItem: null
+        }),
+        validations: {
+            form: {
+                name: {
+                    required,
+                    minLength: minLength(3)
+                },
+                description: {
+                    required,
+                    minLength: minLength(3)
+                }
+            }
+        },
+        methods: {
+            getValidationClass(fieldName) {
+                const field = this.$v.form[fieldName];
 
-      if (field) {
-        return {
-          'md-invalid': field.$invalid && field.$dirty
-        };
-      }
-    },
-    saveItem () {
-      this.sending = true;
-      // TODO
-    },
-    validateItem () {
-      this.$v.$touch();
+                if (field) {
+                    return {
+                        'md-invalid': field.$invalid && field.$dirty
+                    };
+                }
+            },
+            saveItem() {
+                let newVotingItem = {
+                    name: this.form.name,
+                    description: this.form.description
+                };
+                this.lastItem = this.form.name;
+                this.itemSaved = true;
+                this.$emit('onCreateVotingItem', newVotingItem)
+            },
+            validateItem() {
+                this.$v.$touch();
 
-      if (!this.$v.$invalid) {
-        this.saveItem();
-      }
-    }
-  }
-};
+                if (!this.$v.$invalid) {
+                    this.saveItem();
+                }
+            }
+        }
+    };
 </script>
 
 <style lang="scss" scoped>

@@ -4,9 +4,9 @@
             <md-button to="/admin/votings" class="md-icon-button back-button left">
                 <md-icon>arrow_back_ios</md-icon>
             </md-button>
-            <VotingItemCreator class="right"/>
+            <VotingItemCreator class="right" v-bind:votingId="votingId"/>
         </ActionBar>
-        <VotingItemList v-bind:entries="entries"/>
+        <VotingItemList v-bind:entries="entries" v-bind:votingId="votingId"/>
     </div>
 
 </template>
@@ -28,11 +28,14 @@
         computed: {
             entries: function () {
                 return this.$store.getters.votingItems;
+            },
+            votingId: function () {
+                return this.$route.params.votingId;
             }
         },
         methods: {},
         created: function () {
-            this.$store.dispatch(LOAD_VOTING_ITEMS, this.$route.params.votingId);
+            this.$store.dispatch(LOAD_VOTING_ITEMS, this.votingId);
         }
     };
 </script>

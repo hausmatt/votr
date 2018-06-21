@@ -85,7 +85,7 @@ async function createVoting(userId, voting) {
     let admins = {};
     admins[userId] = true;
 
-    let items = [];
+    let items = {};
 
     return db.collection('voting').add({
         ...voting,
@@ -102,6 +102,28 @@ async function removeVoting(votingId) {
     return db.collection('voting').doc(votingId).delete();
 }
 
+/**
+ * @param votingId
+ * @param item
+ * @returns {Promise<void>}
+ */
+async function createVotingItem(votingId, item) {
+    let docRef = await db.collection(`voting/${votingId}/items`).add(item);
+    let voting = await db.collection('voting').doc(votingId).get();
+    let itemIds = voting.data().items;
+    itemIds[docRef.id] = true;
+    return db.collection('voting').doc(votingId).set({items: itemIds}, {merge: true});
+}
+
+async function removeVotingItem(votingId, itemId) {
+    let votingDoc = await db.collection('voting').doc(votingId).get();
+    let voting = votingDoc.data();
+    delete voting.items[itemId];
+
+    await db.collection('voting').doc(votingId).set(voting);
+    return db.collection(`voting/${votingId}/items`).doc(itemId).delete();
+}
+
 export default {
     init,
 
@@ -110,4 +132,7 @@ export default {
 
     createVoting,
     removeVoting,
+
+    createVotingItem,
+    removeVotingItem,
 }

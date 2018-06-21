@@ -15,6 +15,11 @@ export default {
                 error: undefined,
                 success: false
             },
+            addVotingItem: {
+                loading: false,
+                error: undefined,
+                success: false
+            },
             removeVoting: {
                 loading: false,
                 error: undefined,
@@ -40,6 +45,17 @@ export default {
         [actionTypes.VOTING_ADDED_ERROR](state, payload) {
             state.apiCalls.addVoting.error = payload.error;
             state.apiCalls.addVoting.loading = false;
+        },
+        [actionTypes.ADD_VOTING_ITEM](state) {
+            state.apiCalls.addVotingItem.loading = true;
+        },
+        [actionTypes.VOTING_ITEM_ADDED](state) {
+            state.apiCalls.addVotingItem.loading = false;
+            state.apiCalls.addVotingItem.success = true;
+        },
+        [actionTypes.VOTING_ITEM_ADDED_ERROR](state, payload) {
+            state.apiCalls.addVotingItem.error = payload.error;
+            state.apiCalls.addVotingItem.loading = false;
         },
         [actionTypes.REMOVE_VOTING](state) {
             state.apiCalls.removeVoting.loading = false;
@@ -112,6 +128,23 @@ export default {
                     type: actionTypes.VOTINGS_LOADED,
                     votings: n
                 }));
+        },
+        async [actionTypes.ADD_VOTING_ITEM]({commit}, payload) {
+            try {
+                await voting.createVotingItem(payload.votingId, payload.item);
+                commit(actionTypes.VOTING_ITEM_ADDED);
+            } catch (error) {
+                console.error('ADD_VOTING_ITEM failed', error);
+                commit({
+                    type: actionTypes.VOTING_ITEM_ADDED_ERROR,
+                    error: {
+                        message: 'add voting item failed: ' + error
+                    }
+                });
+            }
+        },
+        async [actionTypes.REMOVE_VOTING_ITEM]({commit}, payload) {
+            await voting.removeVotingItem(payload.votingId, payload.itemId)
         }
     },
     getters: {

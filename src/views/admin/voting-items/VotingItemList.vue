@@ -16,6 +16,7 @@
 
 <script>
     import VotingItemListEntry from './VotingItemListEntry.vue';
+    import {REMOVE_VOTING_ITEM} from "../../../store/actions";
 
     export default {
         name: 'VotingItemList',
@@ -23,14 +24,19 @@
             VotingItemListEntry
         },
         props: {
-            entries: Array
+            entries: Array,
+            votingId: String
         },
         data: function () {
             return {};
         },
         methods: {
             removeEntry: function (entry) {
-                alert(`remove entry: ${entry.id}`);
+                alert(`remove entry: ${entry.id} from voting ${this.votingId}`);
+                this.$store.dispatch(REMOVE_VOTING_ITEM, {
+                    itemId: entry.id,
+                    votingId: this.votingId
+                });
             }
         }
     };

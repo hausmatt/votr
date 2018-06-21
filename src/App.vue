@@ -14,6 +14,10 @@
                         <md-icon>home</md-icon>
                         <span class="nav-label">Home</span>
                     </md-list-item>
+                    <md-list-item to="/scoreboard" v-on:click="menuVisible = false">
+                        <md-icon>view_list</md-icon>
+                        <span class="nav-label">Scoreboard</span>
+                    </md-list-item>
                     <md-list-item to="/voting" v-on:click="menuVisible = false">
                         <md-icon>stars</md-icon>
                         <span class="nav-label">Voting</span>

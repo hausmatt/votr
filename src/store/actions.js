@@ -14,6 +14,10 @@ export const ADD_VOTING = 'ADD_VOTING';
 export const VOTING_ADDED = 'VOTING_ADDED';
 export const VOTING_ADDED_ERROR = 'VOTING_ADDED_ERROR';
 
+export const ADD_RATING = 'ADD_RATING';
+export const RATING_ADDED = 'RATING_ADDED';
+export const ADD_RATING_ERROR = 'ADD_RATING_ERROR';
+
 export const REMOVE_VOTING = 'REMOVE_VOTING';
 export const VOTING_REMOVED = 'VOTING_REMOVED';
 export const REMOVE_VOTING_ERROR = 'VOTING_REMOVED';

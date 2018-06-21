@@ -9,7 +9,7 @@
         <div class="md-subhead">{{item.description}}</div>
       </md-card-header>
 
-      <RatingInput @add-rating="addRating" :ratings="item.ratings"/>
+      <Rating :ratings="item.ratings"/>
 
       <md-card-content>
         <md-list class="md-double-line">
@@ -26,9 +26,8 @@
 </template>
 
 <script>
-import RatingInput from './rating/RatingInput';
+import Rating from './rating/Rating';
 import VotingUtil from '../service/votingUtil';
-import {ADD_RATING} from "../store/actions";
 
 export default {
   name: 'Voting',
@@ -40,7 +39,7 @@ export default {
     voting: Object
   },
   components: {
-    RatingInput
+    Rating
   },
   computed: {
       sortedItems() {
@@ -48,12 +47,7 @@ export default {
           result.sort((a,b) => {return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)});
           return result;
       }
-  },
-    methods: {
-      addRating(rating) {
-          this.$store.dispatch(ADD_RATING, rating);
-      }
-    }
+  }
 };
 </script>
 

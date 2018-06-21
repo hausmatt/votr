@@ -15,6 +15,7 @@
     import VotingItemList from './VotingItemList';
     import VotingItemCreator from './VotingItemCreator';
     import ActionBar from '@/components/ActionBar';
+    import {LOAD_VOTING_ITEMS} from "../../../store/actions";
 
     export default {
         name: 'VotingItems',
@@ -26,10 +27,13 @@
         props: {},
         computed: {
             entries: function () {
-                return this.$store.getters.votingById(this.$route.params.votingId);
+                return this.$store.getters.votingItems();
             }
         },
-        methods: {}
+        methods: {},
+        created: function () {
+            this.$store.dispatch(LOAD_VOTING_ITEMS, this.$route.params.votingId);
+        }
     };
 </script>
 

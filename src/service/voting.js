@@ -1,5 +1,5 @@
+import * as firebase from 'firebase';
 import * as Rx from "rxjs";
-import {flatMap, map} from "rxjs/operators"
 
 let db;
 
@@ -30,10 +30,20 @@ function getVotingsByUser(userId) {
  * @returns {Observable<any>}
  */
 function getVotingItems(votingId) {
-    return getVotingById(votingId).pipe(
-        map(voting => voting.items.keys()),
-        flatMap(votingItemIds => votingItemIds.map(itemId => getVotingItemById(votingId, itemId)))
-    );
+    let votingItemsSubject = new Rx.Subject();
+    getVotingById(votingId)
+        .subscribe(voting => {
+            let itemIds = Object.keys(voting.items);
+            let items = itemIds.map(id => getVotingItemById(votingId, id));
+
+            if (items) {
+                Rx.combineLatest(items).subscribe(itemsArr => {
+                    votingItemsSubject.next(itemsArr);
+                })
+            }
+        });
+
+    return votingItemsSubject;
 }
 
 /**
@@ -45,7 +55,8 @@ function getVotingItemById(votingId, votingItemId) {
     let votingItemSubject = new Rx.Subject();
     db.collection(`voting/${votingId}/items`).doc(votingItemId).onSnapshot(doc => {
         if (doc.exists) {
-            votingItemSubject.next({...doc.data(), id: doc.id});
+            let votingItem = {...doc.data(), id: doc.id};
+            votingItemSubject.next(votingItem);
         }
     });
     return votingItemSubject;

@@ -139,7 +139,13 @@ export default new Vuex.Store({
         [actionTypes.REMOVE_VOTING_ERROR](state, payload) {
             state.apiCalls.removeVoting.error = payload.error;
             state.apiCalls.removeVoting.loading = false;
-        }
+        },
+        [actionTypes.VOTINGS_LOADED](state, payload) {
+            state.votings = payload.votings;
+        },
+        [actionTypes.VOTING_ITEMS_LOADED](state, payload) {
+            state.votingItems = payload.votingItems;
+        },
     },
     actions: {
         async [actionTypes.LOGIN_WITH_GOOGLE]({dispatch, commit}) {
@@ -219,10 +225,12 @@ export default new Vuex.Store({
         },
         async [actionTypes.LOAD_VOTING_ITEMS]({commit}, votingId) {
             voting.getVotingItems(votingId)
-                .subscribe(n => commit({
-                    type: actionTypes.VOTING_ITEMS_LOADED,
-                    votingItems: n
-                }));
+                .subscribe(n => {
+                    commit({
+                        type: actionTypes.VOTING_ITEMS_LOADED,
+                        votingItems: n
+                    })
+                });
         },
         async [actionTypes.LOAD_VOTINGS]({commit, state}) {
             voting.getVotingsByUser(state.auth.user.uid)
@@ -231,7 +239,6 @@ export default new Vuex.Store({
                     votings: n
                 }));
         },
-
     },
     getters: {
         isUserLoggedIn: (state) => () => {

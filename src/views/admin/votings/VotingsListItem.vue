@@ -6,12 +6,24 @@
                 <span>Type: {{voting.type}}</span>
             </div>
 
-            <md-button @click="deleteClick" class="md-icon-button md-list-action">
-                <md-icon class="md-primary">delete</md-icon>
-            </md-button>
+            <div>
+                <md-button @click="share" class="md-icon-button md-list-action">
+                    <md-icon class="md-primary">share</md-icon>
+                </md-button>
+                <md-button @click="deleteClick" class="md-icon-button md-list-action">
+                    <md-icon class="md-primary">delete</md-icon>
+                </md-button>
+            </div>
         </md-list-item>
 
         <md-divider/>
+
+        <div>
+            <md-dialog :md-active.sync="showShareUrlDialog">
+                <md-dialog-title>Voting teilen</md-dialog-title>
+                {{votingUrl}}
+            </md-dialog>
+        </div>
     </div>
 </template>
 
@@ -24,12 +36,23 @@
             voting: Object
         },
         data: function () {
-            return {};
+            return {
+                showShareUrlDialog: false
+            };
         },
         methods: {
+            share: function (event) {
+                event.stopPropagation();
+                this.showShareUrlDialog = true;
+            },
             deleteClick: function(event){
                 event.stopPropagation();
                 this.$emit('remove-voting', this.voting);
+            }
+        },
+        computed: {
+            votingUrl() {
+                return `/${this.$store.state.auth.user.uid}/${this.voting.uid}`;
             }
         }
     };

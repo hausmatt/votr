@@ -121,7 +121,7 @@ export default new Vuex.Store({
         [actionTypes.ADD_VOTING](state) {
             state.apiCalls.addVoting.loading = true;
         },
-        [actionTypes.VOTING_ADDED](state, payload) {
+        [actionTypes.VOTING_ADDED](state) {
             state.apiCalls.addVoting.loading = false;
             state.apiCalls.addVoting.success = true;
         },
@@ -190,14 +190,11 @@ export default new Vuex.Store({
                     })
                 });
         },
-        async [actionTypes.ADD_VOTING]({commit, state}, voting) {
+        async [actionTypes.ADD_VOTING]({commit, state}, v) {
             commit(actionTypes.ADD_VOTING);
             try {
-                await Repo.addVoting(state.auth.user.uid, voting);
-                commit({
-                    type: actionTypes.VOTING_ADDED,
-                    voting: voting
-                });
+                await voting.createVoting(state.auth.user.uid, v);
+                commit(actionTypes.VOTING_ADDED);
             } catch (error) {
                 console.error('ADD_VOTING failed', error);
                 commit({
@@ -211,8 +208,8 @@ export default new Vuex.Store({
         async [actionTypes.REMOVE_VOTING]({commit, state}, votingId) {
             commit(actionTypes.REMOVE_VOTING);
             try {
-                await Repo.removeVoting(state.auth.user.uid, votingId);
-                commit({type: actionTypes.VOTING_REMOVED});
+                await voting.removeVoting(votingId);
+                commit(actionTypes.VOTING_REMOVED);
             } catch (error) {
                 console.error('REMOVE_VOTING failed', error);
                 commit({

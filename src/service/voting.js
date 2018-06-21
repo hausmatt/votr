@@ -94,6 +94,14 @@ async function createVoting(userId, voting) {
     });
 }
 
+/**
+ * @param votingId
+ * @returns {Promise<void>}
+ */
+async function removeVoting(votingId) {
+    return db.collection('voting').doc(votingId).delete();
+}
+
 export default {
     init,
 
@@ -101,4 +109,5 @@ export default {
     getVotingItems,
 
     createVoting,
+    removeVoting,
 }

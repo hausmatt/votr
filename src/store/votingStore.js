@@ -63,7 +63,7 @@ export default {
     actions: {
         async [actionTypes.LOAD_VOTINGS]({commit, state, rootState}) {
             commit(actionTypes.LOAD_VOTINGS);
-            Repo.loadVotings(rootState.auth.user.uid)
+            Repo.loadVotings(rootState.login.auth.user.uid)
                 .subscribe(next => {
                     commit(actionTypes.VOTINGS_LOADED, next)
                 });
@@ -71,7 +71,7 @@ export default {
         async [actionTypes.ADD_VOTING]({commit, state, rootState}, voting) {
             commit(actionTypes.ADD_VOTING);
             try {
-                await Repo.addVoting(rootState.auth.user.uid, voting);
+                await Repo.addVoting(rootState.login.auth.user.uid, voting);
                 commit(actionTypes.VOTING_ADDED, voting);
             } catch (error) {
                 console.error('ADD_VOTING failed', error);
@@ -86,7 +86,7 @@ export default {
         async [actionTypes.REMOVE_VOTING]({commit, state, rootState}, votingId) {
             commit(actionTypes.REMOVE_VOTING);
             try {
-                await Repo.removeVoting(rootState.auth.user.uid, votingId);
+                await Repo.removeVoting(rootState.login.auth.user.uid, votingId);
                 commit({type: actionTypes.VOTING_REMOVED});
             } catch (error) {
                 console.error('REMOVE_VOTING failed', error);
@@ -107,8 +107,8 @@ export default {
                     })
                 });
         },
-        async [actionTypes.LOAD_VOTINGS]({commit, state}) {
-            voting.getVotingsByUser(state.auth.user.uid)
+        async [actionTypes.LOAD_VOTINGS]({commit, state, rootState}) {
+            voting.getVotingsByUser(rootState.login.auth.user.uid)
                 .subscribe(n => commit({
                     type: actionTypes.VOTINGS_LOADED,
                     votings: n
@@ -116,15 +116,10 @@ export default {
         }
     },
     getters: {
-        adminVotings: (state, getters, rootState) => rootState.login.auth.user.votings,
-        votingById: (state, getters, rootState) => (votingUid) => {
-            let voting = rootState.login.auth.user.votings.find(v => v.uid === votingUid);
-            return voting ? voting.items : [];
-        },
-        votingItems: (state) => () => {
+        votingItems: (state) => {
             return state.votingItems;
         },
-        votings: (state) => () => {
+        votings: (state) => {
             return state.votings;
         }
     }

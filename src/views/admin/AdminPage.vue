@@ -23,7 +23,7 @@
                 return this.$store.getters.userDisplayName
             },
             loadingData(){
-                return this.$store.state.apiCalls.loadVotings.loading;
+                return this.$store.state.voting.apiCalls.loadVotings.loading;
             }
         },
         created: function () {

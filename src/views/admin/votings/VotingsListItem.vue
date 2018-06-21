@@ -52,7 +52,7 @@
         },
         computed: {
             votingUrl() {
-                return `/${this.$store.state.auth.user.uid}/${this.voting.uid}`;
+                return `/${this.$store.state.login.auth.user.uid}/${this.voting.uid}`;
             }
         }
     };

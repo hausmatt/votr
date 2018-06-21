@@ -15,7 +15,7 @@
         methods: {},
         computed: {
             votings() {
-                return this.$store.getters.adminVotings;
+                return this.$store.getters.votings;
             }
         },
         created: function () {

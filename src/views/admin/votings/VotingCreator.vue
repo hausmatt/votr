@@ -103,7 +103,6 @@
                     name: this.form.name,
                     type: this.form.votingType
                 };
-                debugger;
                 this.$store.dispatch(ADD_VOTING, newVoting);
             },
             validateVoting() {

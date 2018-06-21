@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card v-for="item in sortedItems" :key="item.id">
+    <md-card v-for="item in votingItems" :key="item.id">
       <md-card-media>
       </md-card-media>
 
@@ -43,17 +43,19 @@ export default {
     RatingInput
   },
   computed: {
-      sortedItems() {
-          let result = this.voting.items.slice();
-          result.sort((a,b) => {return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)});
-          return result;
+      votingItems() {
+          if (this.voting && this.voting.items && this.voting.items.length > 0) {
+              return this.voting.items;
+          } else {
+              return new Array(0);
+          }
       }
   },
-    methods: {
-      addRating(rating) {
-          this.$store.dispatch(ADD_RATING, rating);
-      }
+  methods: {
+    addRating(rating) {
+        this.$store.dispatch(ADD_RATING, rating);
     }
+  }
 };
 </script>
 

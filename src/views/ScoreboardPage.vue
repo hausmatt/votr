@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     voting () {
-      return this.$store.state.auth.user.votings;
+      return this.$store.state.login.auth.user.votings;
     }
   }
 };

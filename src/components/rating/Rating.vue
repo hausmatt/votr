@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="md-layout">
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[0]" :is-input="this.isInput"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[1]" :is-input="this.isInput"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[2]" :is-input="this.isInput"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[3]" :is-input="this.isInput"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[4]" :is-input="this.isInput"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[0]" :is-input="false"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[1]" :is-input="false"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[2]" :is-input="false"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[3]" :is-input="false"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[4]" :is-input="false"/>
         </div>
         <div class="rating-number">{{averageRating}}</div>
     </div>

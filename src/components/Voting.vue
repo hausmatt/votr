@@ -9,7 +9,7 @@
         <div class="md-subhead">{{item.description}}</div>
       </md-card-header>
 
-      <Rating :ratings="item.ratings" :is-input="true"/>
+      <Rating :ratings="item.ratings"/>
 
       <md-card-content>
         <md-list class="md-double-line">

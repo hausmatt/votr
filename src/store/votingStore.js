@@ -1,70 +1,11 @@
 import * as actionTypes from './actions';
 import Repo from '../service/repo';
+import voting from '../service/voting';
 
 export default {
     state: {
-        votings: [{
-            id: 1,
-            items: [{
-                id: 123,
-                title: 'First Item',
-                description: 'This is an item! Yay! 42!',
-                ratings: [5, 4, 5],
-                comments: [{
-                    id: 101010,
-                    text: 'This is so awesome!',
-                    timestamp: Date.now()
-                }]
-            }, {
-                id: 125,
-                title: 'Another',
-                description: 'Another description',
-                ratings: [1, 2, 2],
-                comments: [{
-                    id: 51544,
-                    text: 'This is so awesome!',
-                    timestamp: Date.now()
-                }]
-            }, {
-                id: 126,
-                title: 'Another',
-                description: 'Another description',
-                ratings: [5, 4, 4],
-                comments: [{
-                    id: 51545,
-                    text: 'This is so awesome!',
-                    timestamp: Date.now()
-                }]
-            }, {
-                id: 127,
-                title: 'Another',
-                description: 'Another description',
-                ratings: [5, 4, 2],
-                comments: [{
-                    id: 51546,
-                    text: 'This is so awesome!',
-                    timestamp: Date.now()
-                }]
-            }, {
-                id: 124,
-                title: 'Second Item',
-                description: 'This is also an item! Yay! Loop Loop!',
-                ratings: [3, 5, 4, 3, 2, 5, 5],
-                comments: [{
-                    id: 102,
-                    text: 'comment1',
-                    timestamp: Date.now()
-                }, {
-                    id: 103,
-                    text: 'comment2',
-                    timestamp: Date.now()
-                }, {
-                    id: 104,
-                    text: 'comment3',
-                    timestamp: Date.now()
-                }]
-            }]
-        }],
+        votingItems: [],
+        votings: [],
         apiCalls: {
             loadVotings: {
                 loading: false,
@@ -111,6 +52,12 @@ export default {
         [actionTypes.REMOVE_VOTING_ERROR](state, payload) {
             state.apiCalls.removeVoting.error = payload.error;
             state.apiCalls.removeVoting.loading = false;
+        },
+        [actionTypes.VOTINGS_LOADED](state, payload) {
+            state.votings = payload.votings;
+        },
+        [actionTypes.VOTING_ITEMS_LOADED](state, payload) {
+            state.votingItems = payload.votingItems;
         }
     },
     actions: {
@@ -150,6 +97,22 @@ export default {
                     }
                 });
             }
+        },
+        async [actionTypes.LOAD_VOTING_ITEMS]({commit}, votingId) {
+            voting.getVotingItems(votingId)
+                .subscribe(n => {
+                    commit({
+                        type: actionTypes.VOTING_ITEMS_LOADED,
+                        votingItems: n
+                    })
+                });
+        },
+        async [actionTypes.LOAD_VOTINGS]({commit, state}) {
+            voting.getVotingsByUser(state.auth.user.uid)
+                .subscribe(n => commit({
+                    type: actionTypes.VOTINGS_LOADED,
+                    votings: n
+                }));
         }
     },
     getters: {
@@ -157,6 +120,13 @@ export default {
         votingById: (state, getters, rootState) => (votingUid) => {
             let voting = rootState.login.auth.user.votings.find(v => v.uid === votingUid);
             return voting ? voting.items : [];
+        },
+        votingItems: (state) => () => {
+            return state.votingItems;
+        },
+        votings: (state) => () => {
+            return state.votings;
         }
     }
 };
+

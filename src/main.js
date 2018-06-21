@@ -5,8 +5,9 @@ import store from './store/store';
 import './registerServiceWorker';
 import './core/material';
 import firebase from 'firebase/app';
-import {firebaseConfig} from './fbConfig';
+import {firebaseConfig, initFirebase} from './fbConfig';
 import repo from "./service/repo";
+import voting from "./service/voting";
 
 Vue.config.productionTip = false;
 
@@ -15,13 +16,15 @@ firebase.initializeApp(firebaseConfig);
 let app;
 
 if (!app) {
-  app = new Vue({
-    router,
-    store,
-    render: h => h(App)
-  });
+    app = new Vue({
+        router,
+        store,
+        render: h => h(App)
+    });
 
-  repo.init();
+    initFirebase();
+    repo.init();
+    voting.init();
 
-  app.$mount('#app');
+    app.$mount('#app');
 }

@@ -34,10 +34,10 @@
         },
         methods: {
             removeVoting: function (voting) {
-                this.$store.dispatch(REMOVE_VOTING, voting.uid);
+                this.$store.dispatch(REMOVE_VOTING, voting.id);
             },
             votingSelected: function (voting) {
-                this.$router.push({path: `/admin/${voting.uid}/voting-items`});
+                this.$router.push({path: `/admin/${voting.id}/voting-items`});
             }
         }
     };

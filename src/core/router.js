@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../views/HomePage.vue';
 import AdminPage from '../views/admin/AdminPage';
+import ScoreboardPage from '@/views/ScoreboardPage';
 import VotingPage from '@/views/VotingPage';
 import VotingsPage from '@/views/admin/votings/VotingsPage';
 import VotingItemsPage from '@/views/admin/voting-items/VotingItemsPage';
@@ -14,6 +15,11 @@ let router = new Router({
             path: '/',
             name: 'Home',
             component: Home
+        },
+        {
+            path: '/scoreboard',
+            name: 'Scoreboard',
+            component: ScoreboardPage
         },
         {
             path: '/voting',

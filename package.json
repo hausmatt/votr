@@ -7,6 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
+    "test:unit-watch": "vue-cli-service test:unit --watch",
+    "test:e2e": "vue-cli-service test:e2e"
     "test:e2e": "vue-cli-service test:e2e",
     "deploy": "npm run build && firebase deploy"
   },
@@ -32,6 +34,10 @@
     "@vue/test-utils": "^1.0.0-beta.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.3",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2",
     "lint-staged": "^6.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",

@@ -31,7 +31,6 @@
         },
         computed: {
             starsVmArray() {
-
                 let avg = this.roundedAverage;
                 let result = [
                     avg < 0 ? 0 : Math.min(1, avg),

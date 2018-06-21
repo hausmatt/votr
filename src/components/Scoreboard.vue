@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card v-for="item in votingItems" :key="item.id">
+    <md-card v-for="item in sortedItems" :key="item.id">
       <md-card-media>
       </md-card-media>
 
@@ -9,7 +9,7 @@
         <div class="md-subhead">{{item.description}}</div>
       </md-card-header>
 
-      <RatingInput @add-rating="addRating" :ratings="item.ratings"/>
+      <Rating :ratings="item.ratings"/>
 
       <md-card-content>
         <md-list class="md-double-line">
@@ -26,9 +26,8 @@
 </template>
 
 <script>
-import RatingInput from './rating/RatingInput';
+import Rating from './rating/Rating';
 import VotingUtil from '../service/votingUtil';
-import {ADD_RATING} from "../store/actions";
 
 export default {
   name: 'Voting',
@@ -40,21 +39,14 @@ export default {
     voting: Object
   },
   components: {
-    RatingInput
+    Rating
   },
   computed: {
-      votingItems() {
-          if (this.voting && this.voting.items && this.voting.items.length > 0) {
-              return this.voting.items;
-          } else {
-              return new Array(0);
-          }
+      sortedItems() {
+          let result = this.voting.items.slice();
+          result.sort((a,b) => {return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)});
+          return result;
       }
-  },
-  methods: {
-    addRating(rating) {
-        this.$store.dispatch(ADD_RATING, rating);
-    }
   }
 };
 </script>

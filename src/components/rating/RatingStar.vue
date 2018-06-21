@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click="$emit('star-clicked')">
         <div v-if="starValue === 1">
             <md-icon class="md-size-2x" :class="{'md-icon-orange': isInput}">star</md-icon>
         </div>
@@ -23,7 +23,7 @@
 </script>
 
 <style scoped>
-    .md-icon-orange{
+    .md-icon.md-theme-default.md-icon-font.md-icon-orange{
         color: orangered;
     }
 </style>

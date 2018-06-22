@@ -1,22 +1,30 @@
 <template>
     <div class="home">
-        <Voting :voting="this.voting[0]"/>
+        <Voting :votingItems="votingItems" :votingId="votingId"/>
     </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Voting from '@/components/Voting.vue';
+    // @ is an alias to /src
+    import Voting from '@/components/Voting.vue';
+    import {LOAD_VOTING_ITEMS, SET_CURRENT_VOTING_ID} from "../store/actions";
 
-export default {
-  name: 'VotingPage',
-  components: {
-    Voting
-  },
-  computed: {
-    voting () {
-      return this.$store.state.voting.votings;
+    export default {
+        name: 'VotingPage',
+        components: {
+            Voting
+        },
+        computed: {
+            votingItems() {
+                return this.$store.getters.votingItems;
+            },
+            votingId() {
+                return this.$route.params.votingId;
+            }
+        },
+        created: function () {
+            this.$store.dispatch(LOAD_VOTING_ITEMS, this.votingId);
+        }
     }
-  }
-};
+    ;
 </script>

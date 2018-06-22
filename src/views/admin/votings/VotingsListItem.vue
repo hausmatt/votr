@@ -21,7 +21,9 @@
         <div>
             <md-dialog :md-active.sync="showShareUrlDialog">
                 <md-dialog-title>Voting teilen</md-dialog-title>
-                {{votingUrl}}
+                <md-dialog-content>
+                    {{votingUrl}}
+                </md-dialog-content>
             </md-dialog>
         </div>
     </div>
@@ -45,14 +47,14 @@
                 event.stopPropagation();
                 this.showShareUrlDialog = true;
             },
-            deleteClick: function(event){
+            deleteClick: function (event) {
                 event.stopPropagation();
                 this.$emit('remove-voting', this.voting);
             }
         },
         computed: {
             votingUrl() {
-                return `/${this.$store.state.login.auth.user.uid}/${this.voting.id}`;
+                return `${window.location.origin}/#/voting/${this.voting.id}`;
             }
         }
     };

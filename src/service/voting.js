@@ -124,15 +124,34 @@ async function removeVotingItem(votingId, itemId) {
     return db.collection(`voting/${votingId}/items`).doc(itemId).delete();
 }
 
+/**
+ *
+ * @param votingId
+ * @param votingItemId
+ * @param rating
+ * @returns {Promise<void>}
+ */
+async function addRating(votingId, votingItemId, rating) {
+    let docSnapshot = await db.collection(`voting/${votingId}/items`).doc(votingItemId).get();
+    let votingItem = docSnapshot.data();
+    let ratings = votingItem.ratings || [];
+    ratings.push(rating);
+    votingItem.ratings = ratings;
+    return db.collection(`voting/${votingId}/items`).doc(votingItemId).set(votingItem);
+}
+
 export default {
     init,
 
     getVotingsByUser,
     getVotingItems,
+    getVotingById,
 
     createVoting,
     removeVoting,
 
     createVotingItem,
     removeVotingItem,
+
+    addRating,
 }

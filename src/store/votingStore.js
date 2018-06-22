@@ -5,6 +5,7 @@ export default {
     state: {
         votingItems: [],
         votings: [],
+        currentVotingId: '',
         apiCalls: {
             loadVotings: {
                 loading: false,
@@ -73,7 +74,10 @@ export default {
         },
         [actionTypes.VOTING_ITEMS_LOADED](state, payload) {
             state.votingItems = payload.votingItems;
-        }
+        },
+        [actionTypes.SET_CURRENT_VOTING_ID](state, payload) {
+            state.currentVotingId = payload.votingId;
+        },
     },
     actions: {
         async [actionTypes.LOAD_VOTINGS]({commit, state, rootState}) {
@@ -145,6 +149,17 @@ export default {
         },
         async [actionTypes.REMOVE_VOTING_ITEM]({commit}, payload) {
             await voting.removeVotingItem(payload.votingId, payload.itemId)
+        },
+        async [actionTypes.ADD_RATING]({commit}, payload) {
+            console.log(payload);
+
+            /*
+            itemId : "LhRL77Q9JOrALpDdgPcd"
+            rating : 3
+            votingId : "Lif5t7L4Mt5ID3SxjD7H"
+             */
+
+            await voting.addRating(payload.votingId, payload.itemId, payload.rating);
         }
     },
     getters: {

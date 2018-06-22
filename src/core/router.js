@@ -17,12 +17,12 @@ let router = new Router({
             component: Home
         },
         {
-            path: '/scoreboard',
+            path: '/scoreboard/:votingId',
             name: 'Scoreboard',
             component: ScoreboardPage
         },
         {
-            path: '/voting',
+            path: '/voting/:votingId',
             name: 'Voting',
             component: VotingPage
         },

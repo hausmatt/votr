@@ -7,7 +7,7 @@
 <script>
     // @ is an alias to /src
     import Voting from '@/components/Voting.vue';
-    import {LOAD_VOTING_ITEMS, SET_CURRENT_VOTING_ID} from "../store/actions";
+    import {LOAD_VOTING_ITEMS} from "../store/actions";
 
     export default {
         name: 'VotingPage',

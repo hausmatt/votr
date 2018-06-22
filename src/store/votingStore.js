@@ -70,13 +70,10 @@ export default {
             state.apiCalls.removeVoting.loading = false;
         },
         [actionTypes.VOTINGS_LOADED](state, payload) {
-            state.votings = payload.votings;
+            state.votings = [...payload.votings];
         },
         [actionTypes.VOTING_ITEMS_LOADED](state, payload) {
-            state.votingItems = payload.votingItems;
-        },
-        [actionTypes.SET_CURRENT_VOTING_ID](state, payload) {
-            state.currentVotingId = payload.votingId;
+            state.votingItems = [...payload.votingItems];
         },
     },
     actions: {

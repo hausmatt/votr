@@ -5,7 +5,7 @@
             </md-card-media>
 
             <md-card-header>
-                <div class="md-title">{{item.title}}</div>
+                <div class="md-title">{{item.name}}</div>
                 <div class="md-subhead">{{item.description}}</div>
             </md-card-header>
 

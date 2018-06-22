@@ -5,7 +5,7 @@
             </md-card-media>
 
             <md-card-header>
-                <div class="md-title">{{item.title}}</div>
+                <div class="md-title">{{item.name}}</div>
                 <div class="md-subhead">{{item.description}}</div>
             </md-card-header>
 
@@ -42,12 +42,12 @@
         },
         computed: {
             sortedItems() {
-                let result = this.votingItems.slice();
+                let result = [...this.votingItems];
                 result.sort((a, b) => {
-                    if(!a.ratings) {
+                    if(!a.ratings && !a.ratings.length) {
                         return 1;
                     }
-                    if(!b.ratings) {
+                    if(!b.ratings && !b.ratings.length) {
                         return -1;
                     }
                     return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)

@@ -80,7 +80,7 @@
                 };
                 this.lastItem = this.form.name;
                 this.itemSaved = true;
-                this.$emit('onCreateVotingItem', newVotingItem)
+                this.$emit('onCreateVotingItem', newVotingItem);
             },
             validateItem() {
                 this.$v.$touch();

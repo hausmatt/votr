@@ -1,9 +1,8 @@
 import * as firebase from 'firebase';
 import uuidv4 from 'uuid/v4';
-import * as Rx from "rxjs";
+import * as Rx from 'rxjs';
 
 const USER = 'user';
-const VOTING = 'voting';
 const USER_VOTINGS = 'votings';
 
 let db;
@@ -80,6 +79,6 @@ export default {
             }
         });
         return userSubject;
-    },
+    }
 
-}
+};

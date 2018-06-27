@@ -34,7 +34,7 @@ export default {
                     uid: login.user.uid,
                     displayName: login.user.displayName || '',
                     email: login.user.email || '',
-                    photoUrl: login.user.photoURL || '',
+                    photoUrl: login.user.photoURL || ''
                 };
 
                 await Repo.updateUser(user);

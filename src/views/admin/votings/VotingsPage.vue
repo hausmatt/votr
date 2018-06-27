@@ -4,7 +4,7 @@
 
 <script>
     import VotingsList from './VotingsList';
-    import {LOAD_VOTINGS} from "../../../store/actions";
+    import {LOAD_VOTINGS} from '../../../store/actions';
 
     export default {
         name: 'Votings',

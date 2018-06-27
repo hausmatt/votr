@@ -16,7 +16,7 @@
     import VotingUtil from '../../service/votingUtil';
 
     export default {
-        name: "Rating",
+        name: 'Rating',
         components: {
             RatingStar
         },
@@ -36,7 +36,7 @@
                     avg - 2 < 0 ? 0 : Math.min(1, avg - 2),
                     avg - 3 < 0 ? 0 : Math.min(1, avg - 3),
                     avg - 4 < 0 ? 0 : Math.min(1, avg - 4)
-                ]
+                ];
                 console.log('starsVmArrayCalc');
                 return result;
             },
@@ -48,7 +48,7 @@
                 return Math.round(avg * 2) / 2;
             }
         }
-    }
+    };
 </script>
 
 <style scoped>

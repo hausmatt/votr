@@ -14,8 +14,8 @@
 <script>
     import VotingItemList from './VotingItemList';
     import VotingItemCreator from './VotingItemCreator';
-    import ActionBar from '@/components/ActionBar';
-    import {LOAD_VOTING_ITEMS} from "../../../store/actions";
+    import ActionBar from '../../../components/ActionBar';
+    import {LOAD_VOTING_ITEMS} from '../../../store/actions';
 
     export default {
         name: 'VotingItems',

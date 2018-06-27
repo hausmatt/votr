@@ -1,4 +1,4 @@
-import {shallowMount, mount} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
 import RatingStar from '@/components/rating/RatingStar.vue';
 import '@/core/material';
 

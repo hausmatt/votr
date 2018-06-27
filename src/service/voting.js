@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-import * as Rx from "rxjs";
+import * as Rx from 'rxjs';
 
 let db;
 
@@ -39,7 +39,7 @@ function getVotingItems(votingId) {
             if (items) {
                 Rx.combineLatest(items).subscribe(itemsArr => {
                     votingItemsSubject.next(itemsArr);
-                })
+                });
             }
         });
 
@@ -85,7 +85,7 @@ async function createVoting(userId, voting) {
     let admins = {};
     admins[userId] = true;
 
-    if (!!voting.ratings) {
+    if (voting.ratings) {
         voting.ratings = [];
     }
 
@@ -156,5 +156,5 @@ export default {
     createVotingItem,
     removeVotingItem,
 
-    addRating,
-}
+    addRating
+};

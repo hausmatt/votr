@@ -1,18 +1,18 @@
 <template>
     <div class="home">
-        <Voting :votingItems="votingItems" :votingId="votingId"/>
+        <Scoreboard :votingItems="votingItems"/>
     </div>
 </template>
 
 <script>
     // @ is an alias to /src
-    import Voting from '@/components/Voting.vue';
-    import {LOAD_VOTING_ITEMS} from "../store/actions";
+    import Scoreboard from './Scoreboard.vue';
+    import {LOAD_VOTING_ITEMS} from '../../store/actions';
 
     export default {
         name: 'VotingPage',
         components: {
-            Voting
+            Scoreboard
         },
         computed: {
             votingItems() {
@@ -25,6 +25,5 @@
         created: function () {
             this.$store.dispatch(LOAD_VOTING_ITEMS, this.votingId);
         }
-    }
-    ;
+    };
 </script>

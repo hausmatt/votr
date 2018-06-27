@@ -26,8 +26,8 @@
 </template>
 
 <script>
-    import RatingInput from './rating/RatingInput';
-    import {ADD_RATING} from "../store/actions";
+    import RatingInput from '../../components/rating/RatingInput';
+    import {ADD_RATING} from '../../store/actions';
 
     export default {
         name: 'Voting',
@@ -36,7 +36,7 @@
         },
         props: {
             votingItems: Array,
-            votingId: String,
+            votingId: String
         },
         components: {
             RatingInput

@@ -12,15 +12,14 @@
                             :key="voting.uid"/>
         </md-list>
 
-
     </div>
 </template>
 
 <script>
     import VotingListItem from './VotingsListItem';
     import VotingCreator from './VotingCreator';
-    import ActionBar from '@/components/ActionBar';
-    import {REMOVE_VOTING} from "../../../store/actions";
+    import ActionBar from '../../../components/ActionBar';
+    import {REMOVE_VOTING} from '../../../store/actions';
 
     export default {
         name: 'VotingsList',

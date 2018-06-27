@@ -13,7 +13,7 @@
 
 <script>
     import VotingItemCreatorForm from './VotingItemCreatorForm';
-    import {ADD_VOTING_ITEM} from "../../../store/actions";
+    import {ADD_VOTING_ITEM} from '../../../store/actions';
 
     export default {
         name: 'VotingItemCreator',

@@ -14,12 +14,12 @@
 
 <script>
     export default {
-        name: "RatingStar",
+        name: 'RatingStar',
         props: {
             starValue: Number,
             isInput: Boolean
         }
-    }
+    };
 </script>
 
 <style scoped>

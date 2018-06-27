@@ -1,13 +1,19 @@
 <template>
-    <md-table-row class="item-list-entry">
-        <md-table-cell>{{entry.id}}</md-table-cell>
-        <md-table-cell>{{entry.name}}</md-table-cell>
-        <md-table-cell>{{entry.description}}</md-table-cell>
-        <md-table-cell>{{entry.type}}</md-table-cell>
-        <md-table-cell>
-            <md-button class="md-accent" v-on:click="$emit('remove-entry', entry)">Remove</md-button>
-        </md-table-cell>
-    </md-table-row>
+    <div>
+        <md-list-item>
+            <div class="md-list-item-text">
+                <span>{{entry.name}}</span>
+                <span>{{entry.description}}</span>
+            </div>
+
+            <div>
+                <md-button @click="$emit('remove-entry', entry)" class="md-icon-button md-list-action">
+                    <md-icon class="md-primary">delete</md-icon>
+                </md-button>
+            </div>
+        </md-list-item>
+        <md-divider/>
+    </div>
 </template>
 
 <script>

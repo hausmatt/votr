@@ -19,7 +19,7 @@
     import RatingStar from './RatingStar';
 
     export default {
-        name: "Rating",
+        name: 'Rating',
         components: {
             RatingStar
         },
@@ -38,7 +38,7 @@
                     rating - 2 < 0 ? 0 : Math.min(1, rating - 2),
                     rating - 3 < 0 ? 0 : Math.min(1, rating - 3),
                     rating - 4 < 0 ? 0 : Math.min(1, rating - 4)
-                ]
+                ];
                 console.log('starsVmArrayCalc Input');
                 return result;
             }
@@ -49,7 +49,7 @@
                 this.$emit('add-rating', this.userRating);
             }
         }
-    }
+    };
 </script>
 
 <style scoped>

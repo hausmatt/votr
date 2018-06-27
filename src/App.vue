@@ -14,14 +14,6 @@
                         <md-icon>home</md-icon>
                         <span class="nav-label">Home</span>
                     </md-list-item>
-                    <md-list-item to="/scoreboard" v-on:click="menuVisible = false">
-                        <md-icon>view_list</md-icon>
-                        <span class="nav-label">Scoreboard</span>
-                    </md-list-item>
-                    <md-list-item to="/voting" v-on:click="menuVisible = false">
-                        <md-icon>stars</md-icon>
-                        <span class="nav-label">Voting</span>
-                    </md-list-item>
                     <md-list-item v-if="isUserLoggedIn" to="/admin/votings" v-on:click="menuVisible = false">
                         <md-icon>settings</md-icon>
                         <span class="nav-label">Admin</span>
@@ -45,7 +37,7 @@
 </template>
 
 <script>
-    import * as actionTypes from './store/actions'
+    import * as actionTypes from './store/actions';
 
     export default {
         name: 'App',
@@ -54,7 +46,7 @@
         }),
         computed: {
             isUserLoggedIn() {
-                return this.$store.getters.isUserLoggedIn
+                return this.$store.getters.isUserLoggedIn;
             }
         },
         methods: {
@@ -68,7 +60,7 @@
         },
         created: function () {
         }
-    }
+    };
 </script>
 
 <style lang="scss" scoped>

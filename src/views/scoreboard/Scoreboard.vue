@@ -1,9 +1,6 @@
 <template>
     <div>
         <md-card v-for="item in sortedItems" :key="item.id">
-            <md-card-media>
-            </md-card-media>
-
             <md-card-header>
                 <div class="md-title">{{item.name}}</div>
                 <div class="md-subhead">{{item.description}}</div>
@@ -12,22 +9,15 @@
             <Rating :ratings="item.ratings"/>
 
             <md-card-content>
-                <md-list class="md-double-line">
-                    <md-list-item v-for="comment in item.comments" :key="comment.id">
-                        <div class="md-list-item-text">
-                            <span>{{comment.text}}</span>
-                            <span>{{new Date(comment.timestamp).toLocaleString()}}</span>
-                        </div>
-                    </md-list-item>
-                </md-list>
+                <span>number of Votes: {{getVotingsCount(item)}}</span>
             </md-card-content>
         </md-card>
     </div>
 </template>
 
 <script>
-    import Rating from './rating/Rating';
-    import VotingUtil from '../service/votingUtil';
+    import Rating from '../../components/rating/Rating';
+    import VotingUtil from '../../service/votingUtil';
 
     export default {
         name: 'Voting',
@@ -50,9 +40,14 @@
                     if (!b.ratings || !b.ratings.length) {
                         return -1;
                     }
-                    return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)
+                    return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings);
                 });
                 return result;
+            }
+        },
+        methods: {
+            getVotingsCount(item) {
+                return (item.ratings) ? item.ratings.length : 0;
             }
         }
     };

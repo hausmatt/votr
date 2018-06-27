@@ -17,5 +17,5 @@ async function logout() {
 
 export default {
     login,
-    logout,
-}
+    logout
+};

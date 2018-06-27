@@ -6,8 +6,8 @@ import './registerServiceWorker';
 import './core/material';
 import firebase from 'firebase/app';
 import {firebaseConfig, initFirebase} from './fbConfig';
-import repo from "./service/repo";
-import voting from "./service/voting";
+import repo from './service/repo';
+import voting from './service/voting';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
 

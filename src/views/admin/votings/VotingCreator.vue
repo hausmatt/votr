@@ -51,7 +51,7 @@
 <script>
     import {validationMixin} from 'vuelidate';
     import {minLength, required} from 'vuelidate/lib/validators';
-    import {ADD_VOTING} from "../../../store/actions";
+    import {ADD_VOTING} from '../../../store/actions';
 
     export default {
         name: 'VotingCreator',

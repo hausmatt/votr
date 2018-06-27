@@ -13,4 +13,4 @@ export default {
     async getCurrentUser() {
         return firebase.auth().currentUser;
     }
-}
+};

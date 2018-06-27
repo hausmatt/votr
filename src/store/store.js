@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import loginStore from "./loginStore";
-import votingStore from "./votingStore";
+import loginStore from './loginStore';
+import votingStore from './votingStore';
 
 Vue.use(Vuex);
 

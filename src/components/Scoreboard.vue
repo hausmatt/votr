@@ -44,10 +44,10 @@
             sortedItems() {
                 let result = [...this.votingItems];
                 result.sort((a, b) => {
-                    if(!a.ratings && !a.ratings.length) {
+                    if (!a.ratings || !a.ratings.length) {
                         return 1;
                     }
-                    if(!b.ratings && !b.ratings.length) {
+                    if (!b.ratings || !b.ratings.length) {
                         return -1;
                     }
                     return VotingUtil.averageRating(b.ratings) - VotingUtil.averageRating(a.ratings)

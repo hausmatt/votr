@@ -85,8 +85,11 @@ async function createVoting(userId, voting) {
     let admins = {};
     admins[userId] = true;
 
-    let items = {};
+    if (!!voting.ratings) {
+        voting.ratings = [];
+    }
 
+    let items = {};
     return db.collection('voting').add({
         ...voting,
         items,

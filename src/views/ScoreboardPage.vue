@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Scoreboard :votingItems="this.votingItems"/>
+        <Scoreboard :votingItems="votingItems"/>
     </div>
 </template>
 

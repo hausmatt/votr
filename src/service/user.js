@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 /**
  * @returns {Promise<any>}
  */
-async function login(){
+async function login() {
     const provider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithPopup(provider);
 }

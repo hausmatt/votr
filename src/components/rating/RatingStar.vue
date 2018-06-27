@@ -23,7 +23,7 @@
 </script>
 
 <style scoped>
-    .md-icon.md-theme-default.md-icon-font.md-icon-orange{
+    .md-icon.md-theme-default.md-icon-font.md-icon-orange {
         color: orangered;
     }
 </style>

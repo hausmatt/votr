@@ -22,7 +22,7 @@
             userName() {
                 return this.$store.getters.userDisplayName
             },
-            loadingData(){
+            loadingData() {
                 return this.$store.state.voting.apiCalls.loadVotings.loading;
             }
         },

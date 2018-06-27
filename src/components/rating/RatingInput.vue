@@ -1,31 +1,34 @@
 <template>
     <div>
         <div class="md-layout">
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[0]" :is-input="true" @star-clicked="starClicked(0)"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[1]" :is-input="true" @star-clicked="starClicked(1)"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[2]" :is-input="true" @star-clicked="starClicked(2)"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[3]" :is-input="true" @star-clicked="starClicked(3)"/>
-            <RatingStar class="md-layout-item" :star-value="starsVmArray[4]" :is-input="true" @star-clicked="starClicked(4)"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[0]" :is-input="true"
+                        @star-clicked="starClicked(0)"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[1]" :is-input="true"
+                        @star-clicked="starClicked(1)"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[2]" :is-input="true"
+                        @star-clicked="starClicked(2)"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[3]" :is-input="true"
+                        @star-clicked="starClicked(3)"/>
+            <RatingStar class="md-layout-item" :star-value="starsVmArray[4]" :is-input="true"
+                        @star-clicked="starClicked(4)"/>
         </div>
     </div>
 </template>
 
 <script>
     import RatingStar from './RatingStar';
-    import VotingUtil from '../../service/votingUtil';
 
     export default {
         name: "Rating",
         components: {
             RatingStar
         },
-        data: function() {
+        data: function () {
             return {
                 userRating: 0
             };
         },
-        props: {
-        },
+        props: {},
         computed: {
             starsVmArray() {
                 let rating = this.userRating;
@@ -50,8 +53,8 @@
 </script>
 
 <style scoped>
-.rating-number {
-    font-size: large;
-    font-weight: bold;
-}
+    .rating-number {
+        font-size: large;
+        font-weight: bold;
+    }
 </style>

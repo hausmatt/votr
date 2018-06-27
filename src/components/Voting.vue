@@ -27,7 +27,6 @@
 
 <script>
     import RatingInput from './rating/RatingInput';
-    import VotingUtil from '../service/votingUtil';
     import {ADD_RATING} from "../store/actions";
 
     export default {

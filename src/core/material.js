@@ -1,5 +1,21 @@
 import Vue from 'vue';
-import {MdList, MdIcon, MdButton, MdToolbar, MdContent, MdApp, MdDrawer, MdTable, MdDialog, MdCard, MdField, MdMenu, MdSnackbar, MdProgress, MdDivider} from 'vue-material/dist/components';
+import {
+    MdApp,
+    MdButton,
+    MdCard,
+    MdContent,
+    MdDialog,
+    MdDivider,
+    MdDrawer,
+    MdField,
+    MdIcon,
+    MdList,
+    MdMenu,
+    MdProgress,
+    MdSnackbar,
+    MdTable,
+    MdToolbar
+} from 'vue-material/dist/components';
 
 Vue.use(MdApp);
 Vue.use(MdToolbar);

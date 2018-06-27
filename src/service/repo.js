@@ -17,7 +17,7 @@ export default {
     async loadVotings(userId) {
         let votingSubject = new Rx.Subject();
         db.collection(USER_VOTINGS).doc(userId).onSnapshot(function (doc) {
-            if(doc.exists){
+            if (doc.exists) {
                 votingSubject.next(doc.data());
             }
         });
@@ -72,10 +72,10 @@ export default {
      * @param userUid
      * @returns {Subject<any>}
      */
-    loadUser(userUid){
+    loadUser(userUid) {
         let userSubject = new Rx.Subject();
         db.collection(USER).doc(userUid).onSnapshot(function (doc) {
-            if(doc.exists){
+            if (doc.exists) {
                 userSubject.next(doc.data());
             }
         });

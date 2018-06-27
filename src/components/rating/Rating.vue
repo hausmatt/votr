@@ -20,10 +20,8 @@
         components: {
             RatingStar
         },
-        data: function() {
-            return {
-
-            };
+        data: function () {
+            return {};
         },
         props: {
             ratings: Array,
@@ -47,15 +45,15 @@
             },
             roundedAverage() {
                 let avg = this.averageRating;
-                return Math.round(avg*2)/2;
+                return Math.round(avg * 2) / 2;
             }
         }
     }
 </script>
 
 <style scoped>
-.rating-number {
-    font-size: large;
-    font-weight: bold;
-}
+    .rating-number {
+        font-size: large;
+        font-weight: bold;
+    }
 </style>

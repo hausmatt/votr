@@ -11,12 +11,12 @@
 </template>
 
 <script>
-export default {
-  name: 'VotingItemListEntry',
-  props: {
-    entry: Object
-  }
-};
+    export default {
+        name: 'VotingItemListEntry',
+        props: {
+            entry: Object
+        }
+    };
 </script>
 
 <style lang="scss" scoped>

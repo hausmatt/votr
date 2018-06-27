@@ -8,7 +8,7 @@ export default {
         currentVotingId: '',
         apiCalls: {
             loadVotings: {
-                loading: false,
+                loading: true,
                 success: false
             },
             addVoting: {
@@ -32,9 +32,10 @@ export default {
         [actionTypes.LOAD_VOTINGS](state) {
             state.apiCalls.loadVotings.loading = true;
         },
-        [actionTypes.VOTINGS_LOADED](state) {
+        [actionTypes.VOTINGS_LOADED](state, votings) {
             state.apiCalls.loadVotings.loading = false;
             state.apiCalls.loadVotings.success = true;
+            state.votings = votings;
         },
         [actionTypes.ADD_VOTING](state) {
             state.apiCalls.addVoting.loading = true;
@@ -69,11 +70,8 @@ export default {
             state.apiCalls.removeVoting.error = payload.error;
             state.apiCalls.removeVoting.loading = false;
         },
-        [actionTypes.VOTINGS_LOADED](state, payload) {
-            state.votings = [...payload.votings];
-        },
         [actionTypes.VOTING_ITEMS_LOADED](state, payload) {
-            state.votingItems = [...payload.votingItems];
+            state.votingItems = payload.votingItems;
         }
     },
     actions: {
@@ -122,13 +120,6 @@ export default {
                         votingItems: n
                     });
                 });
-        },
-        async [actionTypes.LOAD_VOTINGS]({commit, state, rootState}) {
-            voting.getVotingsByUser(rootState.login.auth.user.uid)
-                .subscribe(n => commit({
-                    type: actionTypes.VOTINGS_LOADED,
-                    votings: n
-                }));
         },
         async [actionTypes.ADD_VOTING_ITEM]({commit}, payload) {
             try {

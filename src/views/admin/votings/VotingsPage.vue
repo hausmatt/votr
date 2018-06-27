@@ -1,5 +1,8 @@
 <template>
-    <VotingsList v-bind:votings="votings"/>
+    <div>
+        <md-progress-spinner v-if="loadingData" md-mode="indeterminate"/>
+        <VotingsList v-bind:votings="votings"/>
+    </div>
 </template>
 
 <script>
@@ -16,6 +19,9 @@
         computed: {
             votings() {
                 return this.$store.getters.votings;
+            },
+            loadingData() {
+                return this.$store.state.voting.apiCalls.loadVotings.loading;
             }
         },
         created: function () {
